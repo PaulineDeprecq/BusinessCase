@@ -85,7 +85,7 @@ class Professional implements UserInterface
     {
         $this->createdAt = new \DateTime();
         $this->garages = new ArrayCollection();
-        $this->username = ucfirst($this->firstname) . ucfirst($this->lastname);        
+        // $this->username = ucfirst($this->firstname) . ucfirst($this->lastname);        
     }
 
     public function getId(): ?int
