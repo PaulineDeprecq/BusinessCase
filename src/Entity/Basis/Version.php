@@ -21,7 +21,7 @@ class Version
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -43,6 +43,7 @@ class Version
     public function __construct()
     {
         $this->cars = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

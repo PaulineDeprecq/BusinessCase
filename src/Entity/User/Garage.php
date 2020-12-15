@@ -26,7 +26,7 @@ class Garage
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, unique=true)
      */
     private $phoneNumber;
 
@@ -60,6 +60,7 @@ class Garage
     public function __construct()
     {
         $this->ads = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -47,12 +47,12 @@ class Professional implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, unique=true)
      */
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=14)
+     * @ORM\Column(type="string", length=14, unique=true)
      */
     private $siret;
 
@@ -76,9 +76,16 @@ class Professional implements UserInterface
      */
     private $isValidate;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $username;
+
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->garages = new ArrayCollection();
+        $this->username = ucfirst($this->firstname) . ucfirst($this->lastname);        
     }
 
     public function getId(): ?int
@@ -269,6 +276,13 @@ class Professional implements UserInterface
     public function setIsValidate(bool $isValidate): self
     {
         $this->isValidate = $isValidate;
+
+        return $this;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

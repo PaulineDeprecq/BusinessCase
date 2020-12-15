@@ -21,7 +21,7 @@ class Generation
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $generation;
 
@@ -43,6 +43,7 @@ class Generation
     public function __construct()
     {
         $this->cars = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

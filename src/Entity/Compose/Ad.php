@@ -158,6 +158,7 @@ class Ad
     public function __construct()
     {
         $this->options = new ArrayCollection();
+        $this->publishedAt = new \DateTime();
     }
 
     public function getId(): ?int

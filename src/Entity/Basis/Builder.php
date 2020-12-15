@@ -20,7 +20,7 @@ class Builder
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -41,6 +41,7 @@ class Builder
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->models = new ArrayCollection();
     }
 

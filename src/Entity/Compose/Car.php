@@ -61,8 +61,9 @@ class Car
 
     public function __construct()
     {
-        $this->finishs = new ArrayCollection();
         $this->ads = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->finishs = new ArrayCollection();
     }
 
     public function getId(): ?int
