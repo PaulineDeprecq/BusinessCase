@@ -7,6 +7,7 @@ use App\Repository\Basis\ModelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ModelRepository::class)
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Model
 {
     /**
+     * @Groups({"model", "builder_extended"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +23,7 @@ class Model
     private $id;
 
     /**
+     * @Groups({"model", "builder_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;

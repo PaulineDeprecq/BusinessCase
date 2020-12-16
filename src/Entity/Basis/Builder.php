@@ -6,6 +6,7 @@ use App\Repository\Basis\BuilderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BuilderRepository::class)
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Builder
 {
     /**
+     * @Groups({"builder"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,21 +22,25 @@ class Builder
     private $id;
 
     /**
+     * @Groups({"builder"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
     /**
+     * @Groups({"builder"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"builder"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @Groups({"builder_extended"})
      * @ORM\OneToMany(targetEntity=Model::class, mappedBy="builder", orphanRemoval=true)
      */
     private $models;

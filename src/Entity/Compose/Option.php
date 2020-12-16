@@ -30,24 +30,13 @@ class Option
     private $icon;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Ad::class, inversedBy="options")
+     * @ORM\ManyToMany(targetEntity=Ad::class, mappedBy="options")
      */
     private $ads;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
 
     public function __construct()
     {
         $this->ads = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -99,30 +88,6 @@ class Option
     public function removeAd(Ad $ad): self
     {
         $this->ads->removeElement($ad);
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

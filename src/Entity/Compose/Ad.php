@@ -145,7 +145,7 @@ class Ad
     private $critAir;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Option::class, mappedBy="ads")
+     * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="ads")
      */
     private $options;
 
