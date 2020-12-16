@@ -2,37 +2,37 @@
 
 namespace App\Controller\Api\V1\Basis;
 
-use App\Entity\Basis\Builder;
-use App\Form\Basis\BuilderType;
-use App\Repository\Basis\BuilderRepository;
+use App\Entity\Basis\Color;
+use App\Form\Basis\ColorType;
+use App\Repository\Basis\ColorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/builders", name="api_v1_builder_")
+ * @Route("/api/v1/colors", name="api_v1_color_")
  */
-class BuilderController extends AbstractController
+class ColorController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(BuilderRepository $builderRepository): Response
+    public function index(ColorRepository $colorRepository): Response
     {
-        $builders = $builderRepository->findAll();
-        return $this->json($builders, 200, [], [
-            'groups' => 'builder',
+        $colors = $colorRepository->findAll();
+        return $this->json($colors, 200, [], [
+            'groups' => 'color',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Builder $builder): Response
+    public function show(Color $color): Response
     {
-        return $this->json($builder, 200, [], [
-            'groups' => ['builder', 'builder_extended'],
+        return $this->json($color, 200, [], [
+            'groups' => ['color'],
         ]);
     }
 
@@ -41,20 +41,20 @@ class BuilderController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedBuilder = json_decode($request->getContent(), true);
+        $postedcolor = json_decode($request->getContent(), true);
 
-        $builder = new Builder();
-        $form = $this->createForm(BuilderType::class, $builder, ['csrf_protection' => false]);
+        $color = new Color();
+        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
 
-        $form->submit($postedBuilder);
+        $form->submit($postedcolor);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($builder);
+            $em->persist($color);
             $em->flush();
 
-            return $this->json($builder, 201, [], [
-                'groups' => ['builder', 'builder_extended'],
+            return $this->json($color, 201, [], [
+                'groups' => ['color'],
             ]);
         }
 
@@ -69,19 +69,19 @@ class BuilderController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Builder $builder, Request $request)
+    public function edit(Color $color, Request $request)
     {
-        $postedBuilder = json_decode($request->getContent(), true);
+        $postedColor = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(BuilderType::class, $builder, ['csrf_protection' => false]);
-        $form->submit($postedBuilder);
+        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
+        $form->submit($postedColor);
 
         if ($form->isValid()) {
-            $builder->setUpdatedAt(new \DateTime());
+            $color->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($builder, 200, [], [
-                'groups' => ['builder', 'builder_extended'],
+            return $this->json($color, 200, [], [
+                'groups' => ['color'],
             ]);
         }
 
@@ -96,10 +96,10 @@ class BuilderController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Builder $builder)
+    public function delete(Color $color)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($builder);
+        $em->remove($color);
         $em->flush();
 
         return $this->json(null, 204);

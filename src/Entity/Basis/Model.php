@@ -29,17 +29,20 @@ class Model
     private $name;
 
     /**
+     * @Groups({"model"})
      * @ORM\ManyToOne(targetEntity=Builder::class, inversedBy="models")
      * @ORM\JoinColumn(nullable=false)
      */
     private $builder;
 
     /**
+     * @Groups({"model"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"model"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

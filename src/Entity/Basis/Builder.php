@@ -22,7 +22,7 @@ class Builder
     private $id;
 
     /**
-     * @Groups({"builder"})
+     * @Groups({"builder", "model"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
