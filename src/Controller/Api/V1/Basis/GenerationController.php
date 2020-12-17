@@ -2,37 +2,37 @@
 
 namespace App\Controller\Api\V1\Basis;
 
-use App\Entity\Basis\Color;
-use App\Form\Basis\ColorType;
-use App\Repository\Basis\ColorRepository;
+use App\Entity\Basis\Generation;
+use App\Form\Basis\GenerationType;
+use App\Repository\Basis\GenerationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/colors", name="api_v1_color_")
+ * @Route("/api/v1/generations", name="api_v1_generation_")
  */
-class ColorController extends AbstractController
+class GenerationController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(ColorRepository $colorRepository): Response
+    public function index(GenerationRepository $generationRepository): Response
     {
-        $colors = $colorRepository->findAll();
-        return $this->json($colors, 200, [], [
-            'groups' => 'color',
+        $generations = $generationRepository->findAll();
+        return $this->json($generations, 200, [], [
+            'groups' => 'generation',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Color $color): Response
+    public function show(Generation $generation): Response
     {
-        return $this->json($color, 200, [], [
-            'groups' => 'color',
+        return $this->json($generation, 200, [], [
+            'groups' => 'generation',
         ]);
     }
 
@@ -41,20 +41,20 @@ class ColorController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedGeneration = json_decode($request->getContent(), true);
 
-        $color = new Color();
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
+        $generation = new Generation();
+        $form = $this->createForm(GenerationType::class, $generation, ['csrf_protection' => false]);
 
-        $form->submit($postedColor);
+        $form->submit($postedGeneration);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($color);
+            $em->persist($generation);
             $em->flush();
 
-            return $this->json($color, 201, [], [
-                'groups' => 'color',
+            return $this->json($generation, 201, [], [
+                'groups' => 'generation',
             ]);
         }
 
@@ -69,19 +69,19 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Color $color, Request $request)
+    public function edit(Generation $generation, Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedGeneration = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
-        $form->submit($postedColor);
+        $form = $this->createForm(GenerationType::class, $generation, ['csrf_protection' => false]);
+        $form->submit($postedGeneration);
 
         if ($form->isValid()) {
-            $color->setUpdatedAt(new \DateTime());
+            $generation->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($color, 200, [], [
-                'groups' => 'color',
+            return $this->json($generation, 200, [], [
+                'groups' => 'generation',
             ]);
         }
 
@@ -96,10 +96,10 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Color $color)
+    public function delete(Generation $generation)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($color);
+        $em->remove($generation);
         $em->flush();
 
         return $this->json(null, 204);

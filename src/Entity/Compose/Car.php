@@ -10,6 +10,7 @@ use App\Repository\Compose\CarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
@@ -17,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Car
 {
     /**
+     * @Groups({"car"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -24,21 +26,25 @@ class Car
     private $id;
 
     /**
+     * @Groups({"car", "ad_extended"})
      * @ORM\ManyToOne(targetEntity=Generation::class, inversedBy="cars")
      */
     private $generation;
 
     /**
+     * @Groups({"car", "ad_extended"})
      * @ORM\ManyToOne(targetEntity=Version::class, inversedBy="cars")
      */
     private $version;
 
     /**
+     * @Groups({"car", "ad_extended"})
      * @ORM\ManyToMany(targetEntity=Finish::class, inversedBy="cars")
      */
     private $finishs;
 
     /**
+     * @Groups({"car", "ad_extended"})
      * @ORM\ManyToOne(targetEntity=Model::class, inversedBy="cars")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -50,11 +56,13 @@ class Car
     private $ads;
 
     /**
+     * @Groups({"car"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"car"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

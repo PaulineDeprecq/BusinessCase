@@ -23,13 +23,13 @@ class Model
     private $id;
 
     /**
-     * @Groups({"model", "builder_extended"})
+     * @Groups({"model", "builder_extended", "ad_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @Groups({"model"})
+     * @Groups({"model", "ad_extended"})
      * @ORM\ManyToOne(targetEntity=Builder::class, inversedBy="models")
      * @ORM\JoinColumn(nullable=false)
      */

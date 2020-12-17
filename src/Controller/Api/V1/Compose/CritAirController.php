@@ -1,38 +1,38 @@
 <?php
 
-namespace App\Controller\Api\V1\Basis;
+namespace App\Controller\Api\V1\Compose;
 
-use App\Entity\Basis\Color;
-use App\Form\Basis\ColorType;
-use App\Repository\Basis\ColorRepository;
+use App\Entity\Compose\CritAir;
+use App\Form\Compose\CritAirType;
+use App\Repository\Compose\CritAirRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/colors", name="api_v1_color_")
+ * @Route("/api/v1/critairs", name="api_v1_critair_")
  */
-class ColorController extends AbstractController
+class CritAirController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(ColorRepository $colorRepository): Response
+    public function index(CritAirRepository $critairRepository): Response
     {
-        $colors = $colorRepository->findAll();
-        return $this->json($colors, 200, [], [
-            'groups' => 'color',
+        $critairs = $critairRepository->findAll();
+        return $this->json($critairs, 200, [], [
+            'groups' => 'critair',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Color $color): Response
+    public function show(CritAir $critair): Response
     {
-        return $this->json($color, 200, [], [
-            'groups' => 'color',
+        return $this->json($critair, 200, [], [
+            'groups' => 'critair',
         ]);
     }
 
@@ -41,20 +41,20 @@ class ColorController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedCritAir = json_decode($request->getContent(), true);
 
-        $color = new Color();
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
+        $critair = new CritAir();
+        $form = $this->createForm(CritAirType::class, $critair, ['csrf_protection' => false]);
 
-        $form->submit($postedColor);
+        $form->submit($postedCritAir);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($color);
+            $em->persist($critair);
             $em->flush();
 
-            return $this->json($color, 201, [], [
-                'groups' => 'color',
+            return $this->json($critair, 201, [], [
+                'groups' => 'critair',
             ]);
         }
 
@@ -69,19 +69,18 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Color $color, Request $request)
+    public function edit(CritAir $critair, Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedCritAir = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
-        $form->submit($postedColor);
+        $form = $this->createForm(CritAirType::class, $critair, ['csrf_protection' => false]);
+        $form->submit($postedCritAir);
 
         if ($form->isValid()) {
-            $color->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($color, 200, [], [
-                'groups' => 'color',
+            return $this->json($critair, 200, [], [
+                'groups' => 'critair',
             ]);
         }
 
@@ -96,10 +95,10 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Color $color)
+    public function delete(CritAir $critair)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($color);
+        $em->remove($critair);
         $em->flush();
 
         return $this->json(null, 204);

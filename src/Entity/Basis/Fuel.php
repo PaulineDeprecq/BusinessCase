@@ -7,6 +7,7 @@ use App\Repository\Basis\FuelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=FuelRepository::class)
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Fuel
 {
     /**
+     * @Groups({"fuel"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,16 +23,19 @@ class Fuel
     private $id;
 
     /**
+     * @Groups({"fuel", "ad_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $type;
 
     /**
+     * @Groups({"fuel"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"fuel"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

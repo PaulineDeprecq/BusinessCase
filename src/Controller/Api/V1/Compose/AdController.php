@@ -1,38 +1,38 @@
 <?php
 
-namespace App\Controller\Api\V1\Basis;
+namespace App\Controller\Api\V1\Compose;
 
-use App\Entity\Basis\Color;
-use App\Form\Basis\ColorType;
-use App\Repository\Basis\ColorRepository;
+use App\Entity\Compose\Ad;
+use App\Form\Compose\AdType;
+use App\Repository\Compose\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/colors", name="api_v1_color_")
+ * @Route("/api/v1/ads", name="api_v1_ad_")
  */
-class ColorController extends AbstractController
+class AdController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(ColorRepository $colorRepository): Response
+    public function index(AdRepository $adRepository): Response
     {
-        $colors = $colorRepository->findAll();
-        return $this->json($colors, 200, [], [
-            'groups' => 'color',
+        $ads = $adRepository->findAll();
+        return $this->json($ads, 200, [], [
+            'groups' => 'ad',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Color $color): Response
+    public function show(Ad $ad): Response
     {
-        return $this->json($color, 200, [], [
-            'groups' => 'color',
+        return $this->json($ad, 200, [], [
+            'groups' => ['ad', 'ad_extended']
         ]);
     }
 
@@ -41,20 +41,20 @@ class ColorController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedAd = json_decode($request->getContent(), true);
 
-        $color = new Color();
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
+        $ad = new Ad();
+        $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
 
-        $form->submit($postedColor);
+        $form->submit($postedAd);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($color);
+            $em->persist($ad);
             $em->flush();
 
-            return $this->json($color, 201, [], [
-                'groups' => 'color',
+            return $this->json($ad, 201, [], [
+                'groups' => 'ad',
             ]);
         }
 
@@ -69,19 +69,19 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Color $color, Request $request)
+    public function edit(Ad $ad, Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedAd = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
-        $form->submit($postedColor);
+        $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
+        $form->submit($postedAd);
 
         if ($form->isValid()) {
-            $color->setUpdatedAt(new \DateTime());
+            $ad->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($color, 200, [], [
-                'groups' => 'color',
+            return $this->json($ad, 200, [], [
+                'groups' => ['ad', 'ad_extended']
             ]);
         }
 
@@ -96,10 +96,10 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Color $color)
+    public function delete(Ad $ad)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($color);
+        $em->remove($ad);
         $em->flush();
 
         return $this->json(null, 204);

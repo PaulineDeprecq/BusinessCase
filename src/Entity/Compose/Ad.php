@@ -9,6 +9,7 @@ use App\Repository\Compose\AdRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
@@ -16,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Ad
 {
     /**
+     * @Groups({"ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,133 +25,159 @@ class Ad
     private $id;
 
     /**
+     * @Groups({"ad"})
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Groups({"ad"})
      * @ORM\Column(type="text")
      */
     private $body;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="datetime")
      */
     private $circulationDate;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer")
      */
     private $mileage;
 
     /**
+     * @Groups({"ad"})
      * @ORM\Column(type="integer")
      */
     private $price;
 
     /**
+     * @Groups({"ad"})
      * @ORM\Column(type="string", length=20)
      */
     private $reference;
 
     /**
+     * @Groups({"ad"})
      * @ORM\Column(type="datetime")
      */
     private $publishedAt;
 
     /**
+     * @Groups({"ad"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $hasFiveDoors;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $hasMechanicalGearbox;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $CO2emission;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $seatNbr;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $speedNbr;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $consumptionL100;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isLeatherUpholstery;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $displacement;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $dinPower;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $fiscalPower;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $maxSpeed;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\Column(type="float", nullable=true)
      */
     private $acceleration;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\ManyToOne(targetEntity=Fuel::class, inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $fuel;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\ManyToOne(targetEntity=Color::class, inversedBy="ads")
      */
     private $color;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $car;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\ManyToOne(targetEntity=CritAir::class, inversedBy="ads")
      */
     private $critAir;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="ads")
+     * @Groups({"ad_extended"})
+     * @ORM\ManyToMany(targetEntity=Opzione::class, inversedBy="ads")
      */
     private $options;
 
     /**
+     * @Groups({"ad_extended"})
      * @ORM\ManyToOne(targetEntity=Garage::class, inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -455,14 +483,14 @@ class Ad
     }
 
     /**
-     * @return Collection|Option[]
+     * @return Collection|Opzione[]
      */
     public function getOptions(): Collection
     {
         return $this->options;
     }
 
-    public function addOption(Option $option): self
+    public function addOption(Opzione $option): self
     {
         if (!$this->options->contains($option)) {
             $this->options[] = $option;
@@ -472,7 +500,7 @@ class Ad
         return $this;
     }
 
-    public function removeOption(Option $option): self
+    public function removeOption(Opzione $option): self
     {
         if ($this->options->removeElement($option)) {
             $option->removeAd($this);

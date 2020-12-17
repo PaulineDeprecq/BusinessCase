@@ -7,6 +7,7 @@ use App\Repository\Basis\FinishRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=FinishRepository::class)
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Finish
 {
     /**
+     * @Groups({"finish"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,21 +23,25 @@ class Finish
     private $id;
 
     /**
+     * @Groups({"finish", "ad_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
     /**
+     * @Groups({"finish"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"finish"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @Groups({"finish_extended"})
      * @ORM\ManyToMany(targetEntity=Car::class, mappedBy="finishs")
      */
     private $cars;

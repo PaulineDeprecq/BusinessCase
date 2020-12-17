@@ -7,6 +7,7 @@ use App\Repository\Basis\GenerationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=GenerationRepository::class)
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Generation
 {
     /**
+     * @Groups({"generation"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,16 +23,19 @@ class Generation
     private $id;
 
     /**
+     * @Groups({"generation", "car_extended", "ad_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $generation;
 
     /**
+     * @Groups({"generation"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"generation"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

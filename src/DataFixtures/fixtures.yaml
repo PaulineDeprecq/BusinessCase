@@ -60,7 +60,7 @@ App\Entity\Compose\Ad:
         fiscalPower: '<numberBetween(2, 12)>'
         maxSpeed: '<numberBetween(130, 250)>'
         acceleration: '<randomFloat(1, 5, 15)>'
-        # options: '<numberBetween(0, 10)>x @option_*'
+        options: '<numberBetween(0, 10)>x @option_*'
         price: '<numberBetween(1000, 50000)>'
         reference (unique): "<regexify('[A-Z0-9]{10}')>"
 
@@ -78,10 +78,10 @@ App\Entity\Compose\CritAir:
     critair_6:
         certificate: 5
 
-# App\Entity\Compose\Option:
-#     option_{1..11}:
-#         name (unique): '<vehicleProperties()>'
-#         icon (unique): '<vehicleProperties()>.jpg'
+App\Entity\Compose\Opzione:
+    option_{1..11}:
+        name (unique): '<vehicleProperties()>'
+        icon (unique): '<vehicleProperties()>.jpg'
 
 App\Entity\User\Professional:
     admin:

@@ -2,37 +2,37 @@
 
 namespace App\Controller\Api\V1\Basis;
 
-use App\Entity\Basis\Color;
-use App\Form\Basis\ColorType;
-use App\Repository\Basis\ColorRepository;
+use App\Entity\Basis\Finish;
+use App\Form\Basis\FinishType;
+use App\Repository\Basis\FinishRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/colors", name="api_v1_color_")
+ * @Route("/api/v1/finishs", name="api_v1_finish_")
  */
-class ColorController extends AbstractController
+class FinishController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(ColorRepository $colorRepository): Response
+    public function index(FinishRepository $finishRepository): Response
     {
-        $colors = $colorRepository->findAll();
-        return $this->json($colors, 200, [], [
-            'groups' => 'color',
+        $finishs = $finishRepository->findAll();
+        return $this->json($finishs, 200, [], [
+            'groups' => 'finish',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Color $color): Response
+    public function show(Finish $finish): Response
     {
-        return $this->json($color, 200, [], [
-            'groups' => 'color',
+        return $this->json($finish, 200, [], [
+            'groups' => ['finish', 'finish_extended'],
         ]);
     }
 
@@ -41,20 +41,20 @@ class ColorController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedFinish = json_decode($request->getContent(), true);
 
-        $color = new Color();
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
+        $finish = new Finish();
+        $form = $this->createForm(FinishType::class, $finish, ['csrf_protection' => false]);
 
-        $form->submit($postedColor);
+        $form->submit($postedFinish);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($color);
+            $em->persist($finish);
             $em->flush();
 
-            return $this->json($color, 201, [], [
-                'groups' => 'color',
+            return $this->json($finish, 201, [], [
+                'groups' => ['finish'],
             ]);
         }
 
@@ -69,19 +69,19 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Color $color, Request $request)
+    public function edit(Finish $finish, Request $request)
     {
-        $postedColor = json_decode($request->getContent(), true);
+        $postedFinish = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(ColorType::class, $color, ['csrf_protection' => false]);
-        $form->submit($postedColor);
+        $form = $this->createForm(FinishType::class, $finish, ['csrf_protection' => false]);
+        $form->submit($postedFinish);
 
         if ($form->isValid()) {
-            $color->setUpdatedAt(new \DateTime());
+            $finish->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($color, 200, [], [
-                'groups' => 'color',
+            return $this->json($finish, 200, [], [
+                'groups' => ['finish'],
             ]);
         }
 
@@ -96,10 +96,10 @@ class ColorController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Color $color)
+    public function delete(Finish $finish)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($color);
+        $em->remove($finish);
         $em->flush();
 
         return $this->json(null, 204);
