@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProfessionalRepository::class)
@@ -14,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Professional implements UserInterface
 {
     /**
+     * @Groups({"professional"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +23,7 @@ class Professional implements UserInterface
     private $id;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -37,46 +40,55 @@ class Professional implements UserInterface
     private $password;
 
     /**
+     * @Groups({"professional", "garage_extended"})
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     * @Groups({"professional", "garage_extended"})
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="string", length=20, unique=true)
      */
     private $phoneNumber;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="string", length=14, unique=true)
      */
     private $siret;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @Groups({"professional_extended"})
      * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="professional", orphanRemoval=true)
      */
     private $garages;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="boolean")
      */
     private $isValidate;
 
     /**
+     * @Groups({"professional"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
@@ -85,6 +97,7 @@ class Professional implements UserInterface
     {
         $this->createdAt = new \DateTime();
         $this->garages = new ArrayCollection();
+        $this->roles = [];
         // $this->username = ucfirst($this->firstname) . ucfirst($this->lastname);        
     }
 

@@ -54,7 +54,7 @@ class FinishController extends AbstractController
             $em->flush();
 
             return $this->json($finish, 201, [], [
-                'groups' => ['finish'],
+                'groups' => ['finish', 'finish_extended'],
             ]);
         }
 
@@ -81,7 +81,7 @@ class FinishController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json($finish, 200, [], [
-                'groups' => ['finish'],
+                'groups' => ['finish', 'finish_extended'],
             ]);
         }
 

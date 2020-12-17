@@ -41,6 +41,7 @@ class Fuel
     private $updatedAt;
 
     /**
+     * @Groups({"fuel_extended"})
      * @ORM\OneToMany(targetEntity=Ad::class, mappedBy="fuel", orphanRemoval=true)
      */
     private $ads;

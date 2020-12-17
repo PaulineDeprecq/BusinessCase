@@ -7,6 +7,7 @@ use App\Repository\User\GarageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=GarageRepository::class)
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Garage
 {
     /**
+     * @Groups({"garage"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,37 +23,44 @@ class Garage
     private $id;
 
     /**
+     * @Groups({"garage", "ad_extended", "professional_extended"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Groups({"garage"})
      * @ORM\Column(type="string", length=20, unique=true)
      */
     private $phoneNumber;
 
     /**
+     * @Groups({"garage_extended"})
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
 
     /**
+     * @Groups({"garage_extended"})
      * @ORM\OneToMany(targetEntity=Ad::class, mappedBy="garage", orphanRemoval=true)
      */
     private $ads;
 
     /**
+     * @Groups({"garage"})
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Groups({"garage"})
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @Groups({"garage_extended"})
      * @ORM\ManyToOne(targetEntity=Professional::class, inversedBy="garages")
      * @ORM\JoinColumn(nullable=false)
      */

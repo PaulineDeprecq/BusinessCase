@@ -1,38 +1,38 @@
 <?php
 
-namespace App\Controller\Api\V1\Compose;
+namespace App\Controller\Api\V1\User;
 
-use App\Entity\Compose\Ad;
-use App\Form\Compose\AdType;
-use App\Repository\Compose\AdRepository;
+use App\Entity\User\Address;
+use App\Form\User\AddressType;
+use App\Repository\User\AddressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/ads", name="api_v1_ad_")
+ * @Route("/api/v1/addresses", name="api_v1_address_")
  */
-class AdController extends AbstractController
+class AddressController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(AdRepository $adRepository): Response
+    public function index(AddressRepository $addressRepository): Response
     {
-        $ads = $adRepository->findAll();
-        return $this->json($ads, 200, [], [
-            'groups' => 'ad',
+        $addresss = $addressRepository->findAll();
+        return $this->json($addresss, 200, [], [
+            'groups' => 'address',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Ad $ad): Response
+    public function show(Address $address): Response
     {
-        return $this->json($ad, 200, [], [
-            'groups' => ['ad', 'ad_extended']
+        return $this->json($address, 200, [], [
+            'groups' => 'address',
         ]);
     }
 
@@ -41,20 +41,20 @@ class AdController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedAd = json_decode($request->getContent(), true);
+        $postedAddress = json_decode($request->getContent(), true);
 
-        $ad = new Ad();
-        $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
+        $address = new Address();
+        $form = $this->createForm(AddressType::class, $address, ['csrf_protection' => false]);
 
-        $form->submit($postedAd);
+        $form->submit($postedAddress);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($ad);
+            $em->persist($address);
             $em->flush();
 
-            return $this->json($ad, 201, [], [
-                'groups' => ['ad', 'ad_extended']
+            return $this->json($address, 201, [], [
+                'groups' => 'address',
             ]);
         }
 
@@ -69,19 +69,18 @@ class AdController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Ad $ad, Request $request)
+    public function edit(Address $address, Request $request)
     {
-        $postedAd = json_decode($request->getContent(), true);
+        $postedAddress = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
-        $form->submit($postedAd);
+        $form = $this->createForm(AddressType::class, $address, ['csrf_protection' => false]);
+        $form->submit($postedAddress);
 
         if ($form->isValid()) {
-            $ad->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($ad, 200, [], [
-                'groups' => ['ad', 'ad_extended']
+            return $this->json($address, 200, [], [
+                'groups' => 'address',
             ]);
         }
 
@@ -96,10 +95,10 @@ class AdController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Ad $ad)
+    public function delete(Address $address)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($ad);
+        $em->remove($address);
         $em->flush();
 
         return $this->json(null, 204);

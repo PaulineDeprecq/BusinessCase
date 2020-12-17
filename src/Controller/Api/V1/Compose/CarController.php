@@ -22,7 +22,7 @@ class CarController extends AbstractController
     {
         $cars = $carRepository->findAll();
         return $this->json($cars, 200, [], [
-            'groups' => 'car',
+            'groups' => ['car', 'car_extended']
         ]);
     }
 
@@ -32,7 +32,7 @@ class CarController extends AbstractController
     public function show(Car $car): Response
     {
         return $this->json($car, 200, [], [
-            'groups' => 'car',
+            'groups' => ['car', 'car_extended']
         ]);
     }
 
@@ -54,7 +54,7 @@ class CarController extends AbstractController
             $em->flush();
 
             return $this->json($car, 201, [], [
-                'groups' => 'car',
+                'groups' => ['car', 'car_extended']
             ]);
         }
 
@@ -81,7 +81,7 @@ class CarController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json($car, 200, [], [
-                'groups' => 'car',
+                'groups' => ['car', 'car_extended']
             ]);
         }
 

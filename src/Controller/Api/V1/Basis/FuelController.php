@@ -32,7 +32,7 @@ class FuelController extends AbstractController
     public function show(Fuel $fuel): Response
     {
         return $this->json($fuel, 200, [], [
-            'groups' => 'fuel',
+            'groups' => ['fuel', 'fuel_extended']
         ]);
     }
 

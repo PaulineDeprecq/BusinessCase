@@ -1,38 +1,38 @@
 <?php
 
-namespace App\Controller\Api\V1\Compose;
+namespace App\Controller\Api\V1\User;
 
-use App\Entity\Compose\Ad;
-use App\Form\Compose\AdType;
-use App\Repository\Compose\AdRepository;
+use App\Entity\User\Garage;
+use App\Form\User\GarageType;
+use App\Repository\User\GarageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/ads", name="api_v1_ad_")
+ * @Route("/api/v1/garages", name="api_v1_garage_")
  */
-class AdController extends AbstractController
+class GarageController extends AbstractController
 {
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(AdRepository $adRepository): Response
+    public function index(GarageRepository $garageRepository): Response
     {
-        $ads = $adRepository->findAll();
-        return $this->json($ads, 200, [], [
-            'groups' => 'ad',
+        $garages = $garageRepository->findAll();
+        return $this->json($garages, 200, [], [
+            'groups' => 'garage',
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"}, methods={"GET"})
      */
-    public function show(Ad $ad): Response
+    public function show(Garage $garage): Response
     {
-        return $this->json($ad, 200, [], [
-            'groups' => ['ad', 'ad_extended']
+        return $this->json($garage, 200, [], [
+            'groups' => ['garage', 'garage_extended']
         ]);
     }
 
@@ -41,20 +41,20 @@ class AdController extends AbstractController
      */
     public function add(Request $request)
     {
-        $postedAd = json_decode($request->getContent(), true);
+        $postedGarage = json_decode($request->getContent(), true);
 
-        $ad = new Ad();
-        $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
+        $garage = new Garage();
+        $form = $this->createForm(GarageType::class, $garage, ['csrf_protection' => false]);
 
-        $form->submit($postedAd);
+        $form->submit($postedGarage);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($ad);
+            $em->persist($garage);
             $em->flush();
 
-            return $this->json($ad, 201, [], [
-                'groups' => ['ad', 'ad_extended']
+            return $this->json($garage, 201, [], [
+                'groups' => ['garage', 'garage_extended']
             ]);
         }
 
@@ -69,19 +69,19 @@ class AdController extends AbstractController
     /**
      * @Route("/{id}", name="edit", requirements={"id": "\d+"}, methods={"PUT", "PATCH"})
      */
-    public function edit(Ad $ad, Request $request)
+    public function edit(Garage $garage, Request $request)
     {
-        $postedAd = json_decode($request->getContent(), true);
+        $postedGarage = json_decode($request->getContent(), true);
 
-        $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
-        $form->submit($postedAd);
+        $form = $this->createForm(GarageType::class, $garage, ['csrf_protection' => false]);
+        $form->submit($postedGarage);
 
         if ($form->isValid()) {
-            $ad->setUpdatedAt(new \DateTime());
+            $garage->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($ad, 200, [], [
-                'groups' => ['ad', 'ad_extended']
+            return $this->json($garage, 200, [], [
+                'groups' => ['garage', 'garage_extended']
             ]);
         }
 
@@ -96,10 +96,10 @@ class AdController extends AbstractController
     /**
      * @Route("/{id}", name="delete", requirements={"id": "\d+"}, methods={"DELETE"})
      */
-    public function delete(Ad $ad)
+    public function delete(Garage $garage)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($ad);
+        $em->remove($garage);
         $em->flush();
 
         return $this->json(null, 204);

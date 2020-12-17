@@ -4,6 +4,7 @@ namespace App\Entity\User;
 
 use App\Repository\User\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AddressRepository::class)
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Address
 {
     /**
+     * @Groups({"address"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -18,26 +20,31 @@ class Address
     private $id;
 
     /**
+     * @Groups({"address", "garage_extended"})
      * @ORM\Column(type="string", length=255)
      */
     private $firstLine;
 
     /**
+     * @Groups({"address", "garage_extended"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $secondLine;
 
     /**
+     * @Groups({"address", "garage_extended"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $thirdLine;
 
     /**
+     * @Groups({"address", "garage_extended"})
      * @ORM\Column(type="string", length=255)
      */
     private $town;
 
     /**
+     * @Groups({"address", "garage_extended"})
      * @ORM\Column(type="string", length=5)
      */
     private $postCode;

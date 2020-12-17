@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Ad
 {
     /**
-     * @Groups({"ad"})
+     * @Groups({"ad", "fuel_extended", "garage_extended"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")

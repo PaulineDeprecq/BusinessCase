@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Car
 {
     /**
-     * @Groups({"car"})
+     * @Groups({"car", "finish_extended"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
