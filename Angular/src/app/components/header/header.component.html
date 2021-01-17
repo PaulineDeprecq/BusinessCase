@@ -1,0 +1,24 @@
+<header>
+	<div class="container-fluid">
+		<nav class="align-items-center d-flex row">
+			<div class="col-1 m-0 text-center">
+				<a routerLink="/">
+					<img id="logo" src="assets/pictures/logo.jpg" alt="Logo">
+				</a>
+			</div>
+			<div class="col-2"></div>
+			<div class="col-7 m-0 p-0 row justify-content-center">
+				<h1>Centre Auto ccas</h1>
+			</div>
+			<div class="col-1 d-flex justify-content-end m-0 p-0">
+				<a *ngIf="!isAuth" class="btn btn-dark" routerLink="/auth">Espace Pro</a>
+				<button 
+					*ngIf="isAuth" 
+					class="btn btn-warning"
+					(click)="onClickLogout()">
+						Déconnexion
+				</button>
+			</div>
+		</nav>
+	</div>
+</header>
