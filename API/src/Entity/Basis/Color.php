@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Color
 {
     /**
-     * @Groups({"color"})
+     * @Groups({"color", "ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,13 +23,13 @@ class Color
     private $id;
 
     /**
-     * @Groups({"color", "ad_extended"})
+     * @Groups({"color", "ad"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $color;
 
     /**
-     * @Groups({"color", "ad_extended"})
+     * @Groups({"color", "ad"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $paintType;

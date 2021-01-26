@@ -1,0 +1,14 @@
+<div class="card border-dark bg-light p-0 my-4">
+	<a [routerLink]="detailsUrl">
+		<div class="card-header bg-dark text-light">
+			<p class="mb-0">{{ ad.title }}</p>
+		</div>
+		<div class="card-body p-0">
+			<h4 class="card-title"><img src="assets/pictures/audia5.jpg" alt="AudiA5"></h4>
+			<p class="card-text m-3 text-justify">{{ ad.body | slice:0:80 }}[...]</p>
+		</div>
+		<div class="card-footer bg-dark text-light text-right">
+			{{ ad.price }} €
+		</div>
+	</a>
+</div>

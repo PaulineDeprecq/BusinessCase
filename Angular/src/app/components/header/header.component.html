@@ -12,12 +12,12 @@
 			</div>
 			<div class="col-1 d-flex justify-content-end m-0 p-0">
 				<a *ngIf="!isAuth" class="btn btn-dark" routerLink="/auth">Espace Pro</a>
-				<button 
+				<a 
 					*ngIf="isAuth" 
-					class="btn btn-warning"
+					class="btn btn-dark"
 					(click)="onClickLogout()">
 						Déconnexion
-				</button>
+				</a>
 			</div>
 		</nav>
 	</div>

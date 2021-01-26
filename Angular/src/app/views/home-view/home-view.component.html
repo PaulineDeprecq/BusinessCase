@@ -1,3 +1,52 @@
 <app-header></app-header>
-<p>home-view works!</p>
+
+<main class="container-fluid m-auto p-0 row">
+
+	<div class="col-1">
+		<app-research></app-research>
+	</div>
+
+	<div class="col-1 h-100 mx-auto p-0 pagination">
+		<div class="m-auto p-0 page-item border-dark"
+			*ngIf="currentPage != 1">
+				<button class="page-link text-light" (click)="onClickChangePages('prev')">&laquo;</button>
+		</div>
+	</div>
+
+	<div class="col-9 h-100 p-0 py-5 row">
+		<section class="scroll col-12">
+			<div class="row m-0 ad-cards card-deck">
+				<app-preview-card
+					*ngFor="let ad of ads"
+					class="w-20"
+					style="min-width: 28rem; max-width: 28rem"
+					[ad]="ad"></app-preview-card>
+			</div>
+		</section>
+		<div class="d-flex fixed-bottom mb-5 pb-5 row">
+			<div class="col-2"></div>
+			<div class="col-9 d-flex p-0 m-0">
+				<div class="col-4">
+					<p class="mb-5">Résultats: {{ totalAds }}</p>
+				</div>
+				<div class="col-4">
+					<p class="mb-5 text-center">Page {{ currentPage }} / {{ totalPages }}</p>
+				</div>
+				<div class="col-4">
+					<p class="mb-5 text-right">Annonce par page: {{ adsPerPage }}</p>
+				</div>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+
+	<div class="col-1 h-100 mx-auto p-0 pagination">
+		<div class="m-auto p-0 page-item border-dark"
+			*ngIf="currentPage != totalPages">
+				<button class="page-link text-light" (click)="onClickChangePages('next')">&raquo;</button>
+		</div>
+	</div>
+	
+</main>
+
 <app-footer></app-footer>

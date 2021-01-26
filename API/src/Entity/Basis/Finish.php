@@ -23,7 +23,7 @@ class Finish
     private $id;
 
     /**
-     * @Groups({"finish", "ad_extended", "car_extended"})
+     * @Groups({"finish", "ad", "car_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;

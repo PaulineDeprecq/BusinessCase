@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Ubuntu:wght@300;400;500;700&display=swap');
 * {
 	margin: 0;
@@ -12,25 +11,47 @@ html {
 	overflow: hidden;
 }
 
-footer {
-	background-color: #c71616;
+.btn {
+	background-color: #2c2c2c;
+	border-color: #2c2c2c;
 	color: white;
-	padding: 20px 0;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-}
-
-footer nav i {
-	font-size: 30px;
+	padding: 6px 15px;
+	font-size: 18px;
+	font-weight: 500;
 }
 
 .btn:hover {
 	background-color: white;
+	border-color: white;
+	color: #2c2c2c;
+}
+
+a:hover {
+	color: #2c2c2c;
+}
+
+a .card-header :hover,
+.search a:hover {
 	color: #c71616;
 }
 
-header {
+.search {
+	font-family: 'Roboto', sans-serif;
+	position: fixed;
+	left: 0;
+	width: 160px;
+}
+
+.container {
+	max-width: 1600px;
+}
+
+/**********
+/** HEADER 
+/**********/
+
+header,
+footer {
 	background-color: #c71616;
 	color: white;
 }
@@ -46,4 +67,160 @@ header h1 {
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 50px;
+}
+
+/****
+ MAIN 
+ ****/
+
+/* SEARCH BAR */
+
+aside.search {
+	background-color: #2c2c2c;
+	color: white;
+	height: 85%;
+}
+
+aside.search h2 {
+	font-size: 25px;
+	font-weight: 700;
+}
+
+aside.search ul li {
+	margin-bottom: 50px;
+}
+
+aside.search ul li.less-mb {
+	margin-bottom: 20px;
+}
+
+aside.search ul li i {
+	font-size: 10px;
+}
+
+aside.search ul li div {
+	width: 80%;
+	height: 5px;
+}
+
+aside.search ul li input {
+	border: 0;
+	text-align: center;
+	background-color: #2c2c2c;
+	color: white;
+	width: 100%;
+	font-weight: 100;
+	font-size: 14px;
+}
+
+aside.search ul li div span {
+	border-radius: 50px;
+	width: 10px !important;
+	height: 13px !important;
+}
+
+.ngx-slider .ngx-slider-pointer {
+	background-color: transparent!important;
+}
+
+.ngx-slider .ngx-slider-bubble {
+	color: inherit!important;
+	bottom: 10px!important;
+	font-size: 14px!important;
+}
+
+.ngx-slider-span.ngx-slider-bubble.ngx-slider-limit.ngx-slider-floor,
+.ngx-slider-span.ngx-slider-bubble.ngx-slider-limit.ngx-slider-ceil {
+	font-size: 11px!important;
+}
+/* END SEARCH BAR */
+
+main {
+	margin: 0 auto;
+	position: relative;
+}
+
+main.container {
+	height: 80%;
+}
+
+main.container-fluid {
+	height: 85%;	
+}
+
+section.scroll {
+	text-align: center;
+	flex: none;
+	height: 95%;
+	overflow: auto;
+	scroll-snap-align: none;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/** Home Ads **/
+
+p.card-text {
+	font-size: 14px;
+}
+
+.w-20 {
+	width: 20%;
+}
+
+/** Pagination **/
+
+button.page-link {
+	font-size: 25px;
+	text-align: center;
+	background-color: #c71616;
+}
+
+.disabled button.page-link {
+	background-color: #fff;
+}
+
+button.page-link:hover {
+	color: #c71616!important;
+	background-color: #333333;
+}
+
+/** Show Ad **/
+
+div.ad-cards img {
+	width: 100%;
+}
+
+section div aside {
+	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
+
+.infocar h2,
+.infocar p {
+	margin: 5px 0;
+	font-weight: 100;
+}
+
+/** login **/
+
+.form-control {
+	font-size: 16px!important;
+}
+
+/******
+ FOOTER 
+ ******/
+ 
+ footer {
+	padding: 20px 0;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+footer nav i {
+	font-size: 30px;
 }

@@ -20,32 +20,40 @@ import { ProfileViewComponent } from './views/profile-view/profile-view.componen
 import { AuthViewComponent } from './views/auth-view/auth-view.component';
 import { ResearchComponent } from './components/research/research.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PreviewCardComponent } from './components/car/preview-card/preview-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    CarCardComponent,
-    PicturesCardComponent,
-    InfosCardComponent,
-    ProfessionalInfosComponent,
-    AdsManagementComponent,
-    GaragesManagementComponent,
-    HomeViewComponent,
-    ErrorViewComponent,
-    ShowAdViewComponent,
     AddAdViewComponent,
-    EditAdViewComponent,
-    ProfileViewComponent,
+    AdsManagementComponent,
+    AppComponent,
     AuthViewComponent,
-    ResearchComponent
+    CarCardComponent,
+    EditAdViewComponent,
+    ErrorViewComponent,
+    FooterComponent,
+    GaragesManagementComponent,
+    HeaderComponent,
+    HomeViewComponent,
+    InfosCardComponent,
+    PicturesCardComponent,
+    PreviewCardComponent,
+    ProfessionalInfosComponent,
+    ProfileViewComponent,
+    ResearchComponent,
+    ShowAdViewComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    NgxSliderModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

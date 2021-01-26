@@ -18,10 +18,23 @@ class AdController extends AbstractController
     /**
      * @Route("", name="index", methods={"GET"})
      */
-    public function index(AdRepository $adRepository): Response
+    public function index(AdRepository $adRepository, Request $req): Response
     {
-        $ads = $adRepository->findAll();
-        return $this->json($ads, 200, [], [
+        $currentPage = ($req->get('page') !== null) ? $req->get('page') : 1;
+        $elementsPerPage = ($req->get('per_page') !== null) ? $req->get('per_page') : 10;
+
+        $ads = $adRepository->getXelementsPerPage($elementsPerPage, $currentPage - 1);
+        $totalAds = $adRepository->countAll()[1];
+        $totalPages = ceil($totalAds / $elementsPerPage);
+
+        return $this->json(
+            [ 
+                'current_page' => (int)$currentPage,
+                'ads_per_page' => (int)$elementsPerPage,
+                'total_pages' => $totalPages,
+                'total_ads' => $totalAds,
+                'ads' => $ads
+            ], 200, [], [
             'groups' => 'ad',
         ]);
     }
@@ -32,7 +45,7 @@ class AdController extends AbstractController
     public function show(Ad $ad): Response
     {
         return $this->json($ad, 200, [], [
-            'groups' => ['ad', 'ad_extended']
+            'groups' => ['ad']
         ]);
     }
 
@@ -54,7 +67,7 @@ class AdController extends AbstractController
             $em->flush();
 
             return $this->json($ad, 201, [], [
-                'groups' => ['ad', 'ad_extended']
+                'groups' => ['ad']
             ]);
         }
 
@@ -81,7 +94,7 @@ class AdController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json($ad, 200, [], [
-                'groups' => ['ad', 'ad_extended']
+                'groups' => ['ad']
             ]);
         }
 

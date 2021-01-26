@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Garage
 {
     /**
-     * @Groups({"garage"})
+     * @Groups({"garage", "ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,7 +23,7 @@ class Garage
     private $id;
 
     /**
-     * @Groups({"garage", "ad_extended", "professional_extended"})
+     * @Groups({"garage", "ad", "professional_extended"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;

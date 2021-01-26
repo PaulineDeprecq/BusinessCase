@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class CritAir
 {
     /**
-     * @Groups({"critair"})
+     * @Groups({"critair", "ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,7 +22,7 @@ class CritAir
     private $id;
 
     /**
-     * @Groups({"critair", "ad_extended"})
+     * @Groups({"critair", "ad"})
      * @ORM\Column(type="integer", unique=true)
      */
     private $certificate;

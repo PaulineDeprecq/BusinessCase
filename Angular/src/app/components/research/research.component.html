@@ -1,1 +1,32 @@
-<p>research works!</p>
+<aside class="col-1 px-3 search">
+	<fieldset class="form-group">
+		<h2 class="py-5 text-center">Recherche</h2>
+		<ul class="d-flex flex-column">
+			<li class="align-items-center d-flex">
+				<p class="m-0">
+
+					<a href="#">
+						<i class="fas fa-plus mr-2"></i>
+						<i class="d-none fas fa-minus"></i>
+						Marques
+					</a>
+				</p>
+			</li>
+			<li class="align-items-center d-flex">
+				<i class="fas fa-plus mr-2"></i>
+				<i class="d-none fas fa-minus"></i>
+				<p class="m-0">
+					<a href="#">Carburant</a>
+				</p>
+			</li>
+			<li class="less-mb">
+				<p>Année</p>
+				<ngx-slider [(value)]="yearValue" [(highValue)]="yearMaxValue" [options]="yearOptions"></ngx-slider>
+			</li>
+			<li class="less-mb">
+				<p>Prix</p>
+				<ngx-slider [(value)]="priceValue" [(highValue)]="priceMaxValue" [options]="priceOptions"></ngx-slider>
+			</li>
+		</ul>
+	</fieldset>
+</aside>

@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Model
 {
     /**
-     * @Groups({"model", "builder_extended"})
+     * @Groups({"model", "ad", "builder_extended"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,13 +23,13 @@ class Model
     private $id;
 
     /**
-     * @Groups({"model", "builder_extended", "ad_extended", "car_extended"})
+     * @Groups({"model", "builder_extended", "ad", "car_extended"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @Groups({"model", "ad_extended"})
+     * @Groups({"model", "ad"})
      * @ORM\ManyToOne(targetEntity=Builder::class, inversedBy="models")
      * @ORM\JoinColumn(nullable=false)
      */

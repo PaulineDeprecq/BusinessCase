@@ -6,8 +6,27 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://kit.fontawesome.com/ac8641d84e.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600&display=swap" rel="stylesheet">
 </head>
 <body>
   <app-root></app-root>
 </body>
+<script>
+  $("#slider-range-bud").slider({
+    range: true,
+    min: 1000,
+    max: 30000,
+    step: 500,
+    values: [8000, 23000],
+    slide: function (event, ui) {
+      $("#data-bud-1").html(ui.values[0] + " €");
+      $("#data-bud-2").html(ui.values[1] + " €");
+    }
+  });
+  $("#data-bud-1").html($("#slider-range-bud").slider("values", 0) + " €");
+  $("#data-bud-2").html($("#slider-range-bud").slider("values", 1) + " €");
+</script>
 </html>

@@ -37,13 +37,13 @@ class Ad
     private $body;
 
     /**
-     * @Groups({"ad_extended"})
-     * @ORM\Column(type="datetime")
+     * @Groups({"ad"})
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $circulationDate;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer")
      */
     private $mileage;
@@ -73,111 +73,111 @@ class Ad
     private $updatedAt;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $hasFiveDoors;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $hasMechanicalGearbox;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $CO2emission;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $seatNbr;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $speedNbr;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $consumptionL100;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isLeatherUpholstery;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $displacement;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $dinPower;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $fiscalPower;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="integer", nullable=true)
      */
     private $maxSpeed;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\Column(type="float", nullable=true)
      */
     private $acceleration;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\ManyToOne(targetEntity=Fuel::class, inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $fuel;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\ManyToOne(targetEntity=Color::class, inversedBy="ads")
      */
     private $color;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $car;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\ManyToOne(targetEntity=CritAir::class, inversedBy="ads")
      */
     private $critAir;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\ManyToMany(targetEntity=Opzione::class, inversedBy="ads")
      */
     private $options;
 
     /**
-     * @Groups({"ad_extended"})
+     * @Groups({"ad"})
      * @ORM\ManyToOne(targetEntity=Garage::class, inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */

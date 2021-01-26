@@ -22,7 +22,7 @@ class Opzione
     private $id;
 
     /**
-     * @Groups({"option", "ad_extended"})
+     * @Groups({"option", "ad"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;

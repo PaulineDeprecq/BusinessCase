@@ -14,7 +14,7 @@ class AdType extends AbstractType
         $builder
             ->add('title')
             ->add('body')
-            ->add('circulationDate')
+            // ->add('circulationDate')
             ->add('mileage')
             ->add('price')
             ->add('reference')
