@@ -10,7 +10,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'auth', component: AuthViewComponent },
+  { path: 'signin', component: AuthViewComponent },
+  { path: 'signup', component: AuthViewComponent },
   { path: '', component: HomeViewComponent },
   { path: 'ad/:id', component: ShowAdViewComponent },
   { path: 'ad/add', canActivate: [AuthGuard], component: AddAdViewComponent },

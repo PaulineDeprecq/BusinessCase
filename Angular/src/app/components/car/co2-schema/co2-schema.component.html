@@ -1,0 +1,43 @@
+<div class="schema-gradient"></div>
+
+<p *ngIf="emission <= 100"
+	class="schema-value schema-value-A">
+	<span class="schema-letter">A</span>
+	{{ emission }} g/km
+</p>
+
+<p *ngIf="emission > 100 && emission <= 120"
+	class="schema-value schema-value-B">
+	<span class="schema-letter">B</span>
+	{{ emission }} g/km
+</p>
+
+<p *ngIf="emission > 120 && emission <= 140"
+	class="schema-value schema-value-C">
+	<span class="schema-letter">C</span>
+	{{ emission }} g/km
+</p>
+
+<p *ngIf="emission > 140 && emission <= 160"
+	class="schema-value schema-value-D">
+	<span class="schema-letter">D</span>
+	{{ emission }} g/km
+</p>
+
+<p *ngIf="emission > 160 && emission <= 200"
+	class="schema-value schema-value-E">
+	<span class="schema-letter">E</span>
+	{{ emission }} g/km
+</p>
+
+<p *ngIf="emission > 200 && emission <= 250"
+	class="schema-value schema-value-F">
+	<span class="schema-letter">F</span>
+	{{ emission }} g/km
+</p>
+
+<p *ngIf="emission > 250"
+	class="schema-value schema-value-G">
+	<span class="schema-letter">G</span>
+	{{ emission }} g/km
+</p>

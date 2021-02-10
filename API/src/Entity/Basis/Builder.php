@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Builder
 {
     /**
-     * @Groups({"builder"})
+     * @Groups({"builder", "ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")

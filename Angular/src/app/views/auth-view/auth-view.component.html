@@ -1,1 +1,12 @@
-<p>auth-view works!</p>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-lg-4 col-sm-6 mx-auto">
+			<div class="card card-register p-4">
+				<h2 class="title">{{ title }}</h2>
+
+				<app-signin-form *ngIf="type === 'signin'"></app-signin-form>
+				<app-signup-form *ngIf="type === 'signup'"></app-signup-form>
+			</div>
+		</div>
+	</div>
+</div>

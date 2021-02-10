@@ -30,4 +30,17 @@ export class Fuel {
 	public set type(value: string) {
 		this._type = value;
 	}
+
+	static fromJSON(data: any): Fuel {
+		return new Fuel(
+			data._id,
+			data.type
+		);
+	}
+
+	toJSON(): any {
+		return {
+			type: this.type
+		}
+	}
 }

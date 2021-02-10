@@ -3,6 +3,7 @@
 namespace App\Entity\Compose;
 
 use App\Entity\Basis\Color;
+use App\Entity\Basis\ColorType;
 use App\Entity\Basis\Fuel;
 use App\Entity\User\Garage;
 use App\Repository\Compose\AdRepository;
@@ -26,19 +27,13 @@ class Ad
 
     /**
      * @Groups({"ad"})
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @Groups({"ad"})
      * @ORM\Column(type="text")
      */
     private $body;
 
     /**
      * @Groups({"ad"})
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $circulationDate;
 
@@ -183,6 +178,12 @@ class Ad
      */
     private $garage;
 
+    /**
+     * @Groups({"ad"})
+     * @ORM\ManyToOne(targetEntity=ColorType::class, inversedBy="ads")
+     */
+    private $paintType;
+
     public function __construct()
     {
         $this->options = new ArrayCollection();
@@ -192,18 +193,6 @@ class Ad
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getBody(): ?string
@@ -218,12 +207,12 @@ class Ad
         return $this;
     }
 
-    public function getCirculationDate(): ?\DateTimeInterface
+    public function getCirculationDate(): ?string
     {
         return $this->circulationDate;
     }
 
-    public function setCirculationDate(\DateTimeInterface $circulationDate): self
+    public function setCirculationDate(string $circulationDate): self
     {
         $this->circulationDate = $circulationDate;
 
@@ -517,6 +506,18 @@ class Ad
     public function setGarage(?Garage $garage): self
     {
         $this->garage = $garage;
+
+        return $this;
+    }
+
+    public function getPaintType(): ?ColorType
+    {
+        return $this->paintType;
+    }
+
+    public function setPaintType(?ColorType $paintType): self
+    {
+        $this->paintType = $paintType;
 
         return $this;
     }

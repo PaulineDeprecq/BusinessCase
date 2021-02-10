@@ -59,7 +59,7 @@ class Professional implements UserInterface
 
     /**
      * @Groups({"professional"})
-     * @ORM\Column(type="string", length=14, unique=true)
+     * @ORM\Column(type="string", length=17, unique=true)
      */
     private $siret;
 

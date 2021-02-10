@@ -29,12 +29,6 @@ class Color
     private $color;
 
     /**
-     * @Groups({"color", "ad"})
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $paintType;
-
-    /**
      * @Groups({"color"})
      * @ORM\Column(type="datetime")
      */
@@ -70,18 +64,6 @@ class Color
     public function setColor(string $color): self
     {
         $this->color = $color;
-
-        return $this;
-    }
-
-    public function getPaintType(): ?string
-    {
-        return $this->paintType;
-    }
-
-    public function setPaintType(?string $paintType): self
-    {
-        $this->paintType = $paintType;
 
         return $this;
     }

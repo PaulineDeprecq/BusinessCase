@@ -5,6 +5,8 @@ namespace App\Repository\Compose;
 use App\Entity\Compose\Ad;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Oro\ORM\Query\AST\Functions\SimpleFunction;
+use Oro\ORM\Query\AST\Platform\Functions\Mysql\Year;
 
 /**
  * @method Ad|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,23 +25,59 @@ class AdRepository extends ServiceEntityRepository
      * Pagination
      * @return Ad[] Returns an array of Ad objects
      */
-    public function getXelementsPerPage($limit = 15, $offset = 0)
+    public function getXelementsPerPage($limit = 10, $offset = 0, $search) 
     {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.publishedAt', 'ASC')
+        $qb = $this->makeQuery($search)
+            ->addSelect('a')
+            ->orderBy('a.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset * $limit)
-            ->getQuery()
-            ->getResult()
         ;
+        
+        return $qb->getQuery()->getResult();
     }
 
-    public function countAll()
+    public function countAll($search)
     {
-        return $this->createQueryBuilder('a')
-            ->select('count(a)')
-            ->getQuery()
-            ->getOneOrNullResult()
+        $qb = $this->makeQuery($search);
+        return $qb->select('count(a)')->getQuery()->getOneOrNullResult();
+    }
+
+    public function makeQuery($search) {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.car', 'c')
+            ->leftJoin('c.model', 'm')
+            ->leftJoin('m.builder', 'b')
+            ->leftJoin('a.fuel', 'f')
         ;
+
+        if($search['builder']) {
+            $qb->andWhere('b.name = :builder')
+                ->setParameter('builder', $search['builder'])
+            ;
+        }
+
+        if($search['model']) {
+            $qb->andWhere('m.name = :model')
+                ->setParameter('model', $search['model'])
+            ;
+        }
+
+        $qb->andWhere('a.circulationDate BETWEEN :year_min AND :year_max')
+            ->setParameter('year_min', $search['yearMin'])
+            ->setParameter('year_max', $search['yearMax'])
+        ;
+
+        $qb->andWhere('a.price BETWEEN :price_min AND :price_max')
+            ->setParameter('price_min', $search['priceMin'])
+            ->setParameter('price_max', $search['priceMax'])
+        ;
+
+        if($search['fuel']) {
+            $qb->andWhere('f.type = :fuel')
+                ->setParameter('fuel', $search['fuel'])
+            ;
+        }
+        return $qb;
     }
 }

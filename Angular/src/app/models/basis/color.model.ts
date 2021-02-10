@@ -49,4 +49,18 @@ export class Color {
 		this._paintType = value;
 	}
 
+	static fromJSON(data: any): Color {
+		return new Color(
+			data.id,
+			data.color,
+			data.paintType
+		);
+	}
+
+	toJSON(): any {
+		return {
+			color: this.color,
+			paintType: this.paintType
+		}
+	}
 }

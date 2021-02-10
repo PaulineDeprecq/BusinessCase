@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthViewComponent implements OnInit {
 
-  constructor() { }
+  title: string;
+  type: string;
+
+  constructor(private location: Location) {}
 
   ngOnInit(): void {
+    this.getPath();
+  }
+
+  getPath() {
+    const path = this.location.prepareExternalUrl(this.location.path()).slice(1);
+    if(path === 'signup') {
+      this.title = 'Inscription';
+      this.type = 'signup';
+    } else if(path === 'signin') {
+      this.title = 'Connexion';
+      this.type = 'signin';
+    }
   }
 
 }

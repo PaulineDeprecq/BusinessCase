@@ -15,8 +15,8 @@ html {
 	background-color: #2c2c2c;
 	border-color: #2c2c2c;
 	color: white;
-	padding: 6px 15px;
-	font-size: 18px;
+	padding: 1rem 1.5rem;
+	font-size: 1.9rem;
 	font-weight: 500;
 }
 
@@ -32,7 +32,7 @@ a:hover {
 
 a .card-header :hover,
 .search a:hover {
-	color: #c71616;
+	color: #d63031;
 }
 
 .search {
@@ -73,52 +73,7 @@ header h1 {
  MAIN 
  ****/
 
-/* SEARCH BAR */
-
-aside.search {
-	background-color: #2c2c2c;
-	color: white;
-	height: 85%;
-}
-
-aside.search h2 {
-	font-size: 25px;
-	font-weight: 700;
-}
-
-aside.search ul li {
-	margin-bottom: 50px;
-}
-
-aside.search ul li.less-mb {
-	margin-bottom: 20px;
-}
-
-aside.search ul li i {
-	font-size: 10px;
-}
-
-aside.search ul li div {
-	width: 80%;
-	height: 5px;
-}
-
-aside.search ul li input {
-	border: 0;
-	text-align: center;
-	background-color: #2c2c2c;
-	color: white;
-	width: 100%;
-	font-weight: 100;
-	font-size: 14px;
-}
-
-aside.search ul li div span {
-	border-radius: 50px;
-	width: 10px !important;
-	height: 13px !important;
-}
-
+/* SEARCH BAR SLIDERS */
 .ngx-slider .ngx-slider-pointer {
 	background-color: transparent!important;
 }
@@ -133,7 +88,7 @@ aside.search ul li div span {
 .ngx-slider-span.ngx-slider-bubble.ngx-slider-limit.ngx-slider-ceil {
 	font-size: 11px!important;
 }
-/* END SEARCH BAR */
+/* END SEARCH BAR SLIDERS */
 
 main {
 	margin: 0 auto;
@@ -162,6 +117,14 @@ section.scroll {
 
 /** Home Ads **/
 
+.ad-card:hover {
+	transform: translateY(-5px);
+}
+
+div.ad-cards img {
+	width: 100%;
+}
+
 p.card-text {
 	font-size: 14px;
 }
@@ -175,7 +138,7 @@ p.card-text {
 button.page-link {
 	font-size: 25px;
 	text-align: center;
-	background-color: #c71616;
+	background-color: #d63031;
 }
 
 .disabled button.page-link {
@@ -183,25 +146,8 @@ button.page-link {
 }
 
 button.page-link:hover {
-	color: #c71616!important;
+	color: #d63031!important;
 	background-color: #333333;
-}
-
-/** Show Ad **/
-
-div.ad-cards img {
-	width: 100%;
-}
-
-section div aside {
-	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
-}
-
-.infocar h2,
-.infocar p {
-	margin: 5px 0;
-	font-weight: 100;
 }
 
 /** login **/
@@ -219,6 +165,7 @@ section div aside {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	z-index: 1500;
 }
 
 footer nav i {

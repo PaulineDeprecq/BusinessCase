@@ -1,0 +1,87 @@
+a h2.h1:hover,
+a.nav-link:active {
+	color: #d63031!important;
+}
+
+button#interested {
+	padding: .5rem 1.5rem;
+}
+
+button#interested:hover {
+	background-color: #d63031!important;
+	color: #333!important;
+}
+
+.infocar h2,
+.infocar p {
+	margin: 1rem 0;
+	font-weight: 100;
+}
+
+li.shadow a:visited {
+	background-color: #eee!important;
+}
+
+.non-active-panel {
+	background-color: white;
+}
+
+.options-icon img {
+	width: 3rem;
+	margin: 0 .525rem .8rem 0;
+}
+
+.picto {
+	width: 2.5rem;
+	height: 2.5rem;
+	margin: .4rem .5rem 0;
+}
+
+.picto-price-tag {
+	width: 2rem;
+	height: 2rem;
+	margin: -.3rem 0 0;
+}
+
+.picto-title {
+	margin-top: -.8rem;
+}
+
+.seat {
+	width: 2rem;
+	height: 2rem;
+	margin-top: -.7rem;
+}
+
+section div aside {
+	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
+
+table {
+	font-size: 1.6rem;
+	line-height: 1;
+	width: 100%;
+}
+
+table button {
+	font-size: 1.6rem;
+	margin: 3px 0 5px;
+}
+
+table tr {
+	border-bottom: solid 1px;
+}
+
+table td,
+table th {
+	padding: 0 1rem;
+}
+
+.w-40 {
+	width: 40%;
+}
+
+.w-60 {
+	width: 60%;
+}

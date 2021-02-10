@@ -7,9 +7,8 @@ import { Car } from './car.model';
 
 export class Ad {
 	private _id: number;
-	private _title: string;
 	private _body: string;
-	private _circulationDate: Date;
+	private _circulationDate: string;
 	private _mileage: number;
 	private _price: number;
 	private _reference: string;
@@ -27,16 +26,20 @@ export class Ad {
 	private _fiscalPower: number;
 	private _maxSpeed: number;
 	private _acceleration: number;
+	private _paintType: string;
 	private _fuel: Fuel;
 	private _color: Color;
 	private _car: Car;
-	private _critairCertificate: CritAir;
+	private _critair: CritAir;
 	private _options: Array<Opzione>;
 	private _garage: Garage;
 
-	constructor(id: number, title: string, body: string, circulationDate: Date, mileage: number, price: number, reference: string, publishedAt: Date, updatedAt: Date, hasFiveDoors: boolean, hasMechanicalGearbox: boolean, CO2emission: number, seatNbr: number, speedNbr: number, consumptionL100: number, isLeatherUpholstery: boolean, displacement: number, dinPower: number, fiscalPower: number, maxSpeed: number, acceleration: number, fuel: Fuel, color: Color, car: Car, critairCertificate: CritAir, options: Array<Opzione>, garage: Garage) {
-		this._id = id;
-		this._title = title;
+	constructor(body: string, circulationDate: string, mileage: number, price: number, reference: string, publishedAt: Date, updatedAt: Date, 
+				hasFiveDoors: boolean, hasMechanicalGearbox: boolean, CO2emission: number, seatNbr: number, speedNbr: number, consumptionL100: number, 
+				isLeatherUpholstery: boolean, displacement: number, dinPower: number, fiscalPower: number, maxSpeed: number, acceleration: number, 
+				paintType:string, fuel: Fuel, color: Color, car: Car, critair: CritAir, options: Array<Opzione>, garage: Garage, id?: number) {
+					
+		if(id) this._id = id;
 		this._body = body;
 		this._circulationDate = circulationDate;
 		this._mileage = mileage;
@@ -56,10 +59,11 @@ export class Ad {
 		this._fiscalPower = fiscalPower;
 		this._maxSpeed = maxSpeed;
 		this._acceleration = acceleration;
+		this._paintType = paintType;
 		this._fuel = fuel;
 		this._color = color;
 		this._car = car;
-		this._critairCertificate = critairCertificate;
+		this._critair = critair;
 		this._options = options;
 		this._garage = garage;
 	}
@@ -73,14 +77,6 @@ export class Ad {
 	}
 
     /**
-     * Getter title
-     * @return {string}
-     */
-	public get title(): string {
-		return this._title;
-	}
-
-    /**
      * Getter body
      * @return {string}
      */
@@ -90,9 +86,9 @@ export class Ad {
 
     /**
      * Getter circulationDate
-     * @return {Date}
+     * @return {string}
      */
-	public get circulationDate(): Date {
+	public get circulationDate(): string {
 		return this._circulationDate;
 	}
 
@@ -233,6 +229,14 @@ export class Ad {
 	}
 
     /**
+     * Getter paintType
+     * @return {string}
+     */
+	public get paintType(): string {
+		return this._paintType;
+	}
+
+    /**
      * Getter fuel
      * @return {Fuel}
      */
@@ -257,11 +261,11 @@ export class Ad {
 	}
 
     /**
-     * Getter critairCertificate
+     * Getter critair
      * @return {CritAir}
      */
-	public get critairCertificate(): CritAir {
-		return this._critairCertificate;
+	public get critair(): CritAir {
+		return this._critair;
 	}
 
     /**
@@ -281,14 +285,6 @@ export class Ad {
 	}
 
     /**
-     * Setter title
-     * @param {string} value
-     */
-	public set title(value: string) {
-		this._title = value;
-	}
-
-    /**
      * Setter body
      * @param {string} value
      */
@@ -298,9 +294,9 @@ export class Ad {
 
     /**
      * Setter circulationDate
-     * @param {Date} value
+     * @param {string} value
      */
-	public set circulationDate(value: Date) {
+	public set circulationDate(value: string) {
 		this._circulationDate = value;
 	}
 
@@ -433,6 +429,14 @@ export class Ad {
 	}
 
     /**
+     * Setter paintType
+     * @param {string} value
+     */
+	public set paintType(value: string) {
+		this._paintType = value;
+	}
+
+    /**
      * Setter fuel
      * @param {Fuel} value
      */
@@ -457,11 +461,11 @@ export class Ad {
 	}
 
     /**
-     * Setter critairCertificate
+     * Setter critair
      * @param {CritAir} value
      */
-	public set critairCertificate(value: CritAir) {
-		this._critairCertificate = value;
+	public set critair(value: CritAir) {
+		this._critair = value;
 	}
 
     /**
@@ -480,35 +484,76 @@ export class Ad {
 		this._garage = value;
 	}
 
-	toPlainObj() {
+	static fromJSON(data: any): Ad {
+		return new Ad(
+			data.body,
+			this.toFrenchDateFormat(data.circulationDate),
+			data.mileage,
+			data.price,
+			data.reference,
+			data.publishedAt,
+			data.updatedAt,
+			data.hasFiveDoors,
+			data.hasMechanicalGearbox,
+			data.CO2emission,
+			data.seatNbr,
+			data.speedNbr,
+			data.consumptionL100,
+			data.isLeatherUpholstery,
+			data.displacement,
+			data.dinPower,
+			data.fiscalPower,
+			data.maxSpeed,
+			data.acceleration,
+			data.paintType,
+			Fuel.fromJSON(data.fuel),
+			Color.fromJSON(data.color),
+			Car.fromJSON(data.car),
+			CritAir.fromJSON(data.critAir),
+			data.options.map((opzione: any) => Opzione.fromJSON(opzione)),
+			Garage.fromJSON(data.garage),
+			data.id
+		);
+	}
+
+	toJSON(): any {
 		return {
-			id: this._id,
-			title: this._title,
-			body: this._body,
-			circulationDate: this._circulationDate,
-			mileage: this._mileage,
-			price: this._price,
-			reference: this._reference,
-			publishedAt: this._publishedAt,
-			updatedAt: this._updatedAt,
-			hasFiveDoors: this._hasFiveDoors,
-			hasMechanicalGearbox: this._hasMechanicalGearbox,
-			CO2emission: this._CO2emission,
-			seatNbr: this._seatNbr,
-			speedNbr: this._speedNbr,
-			consumptionL100: this._consumptionL100,
-			isLeatherUpholstery: this._isLeatherUpholstery,
-			displacement: this._displacement,
-			dinPower: this._dinPower,
-			fiscalPower: this._fiscalPower,
-			maxSpeed: this._maxSpeed,
-			acceleration: this._acceleration,
-			fuel: this._fuel,
-			color: this._color,
-			car: this._car,
-			critairCertificate: this._critairCertificate,
-			options: this._options,
-			garage: this._garage
+			body: this.body,
+			circulationDate: this.circulationDate,
+			mileage: this.mileage,
+			price: this.price,
+			reference: this.reference,
+			publishedAt: this.publishedAt,
+			updatedAt: this.updatedAt,
+			hasFiveDoors: this.hasFiveDoors,
+			hasMechanicalGearbox: this.hasMechanicalGearbox,
+			CO2emission: this.CO2emission,
+			seatNbr: this.seatNbr,
+			speedNbr: this.speedNbr,
+			consumptionL100: this.consumptionL100,
+			isLeatherUpholstery: this.isLeatherUpholstery,
+			displacement: this.displacement,
+			dinPower: this.dinPower,
+			fiscalPower: this.fiscalPower,
+			maxSpeed: this.maxSpeed,
+			acceleration: this.acceleration,
+			paintType: this.paintType,
+			fuel: this.fuel.toJSON(),
+			color: this.color.toJSON(),
+			car: this.car.toJSON(),
+			critair: this.critair.toJSON(),
+			options: this.options.map((opzione: any) => opzione.toJSON()),
+			garage: this.garage.toJSON(),
+			id: this.id
 		}
+	}
+
+	/**
+	 * Method used to transform a US string Date (Y/m/d) into a French string Date (d/m/Y)
+	 * @param date 
+	 */
+	static toFrenchDateFormat(date: string): string {
+		const newDate = date.split('/');
+		return newDate[2] + '/' + newDate[1] + '/' + newDate[0];
 	}
 }

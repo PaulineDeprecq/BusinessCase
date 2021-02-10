@@ -31,4 +31,16 @@ export class Version {
 		this._name = value;
 	}
 
+	static fromJSON(data: any): Version {
+		return new Version(
+			data.id,
+			data.name
+		);
+	}
+
+	toJSON(): any {
+		return {
+			name: this.name
+		}
+	}
 }

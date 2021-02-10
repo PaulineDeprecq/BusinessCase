@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Address
 {
     /**
-     * @Groups({"address"})
+     * @Groups({"address", "ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,31 +20,31 @@ class Address
     private $id;
 
     /**
-     * @Groups({"address", "garage_extended"})
+     * @Groups({"address", "garage_extended", "ad"})
      * @ORM\Column(type="string", length=255)
      */
     private $firstLine;
 
     /**
-     * @Groups({"address", "garage_extended"})
+     * @Groups({"address", "garage_extended", "ad"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $secondLine;
 
     /**
-     * @Groups({"address", "garage_extended"})
+     * @Groups({"address", "garage_extended", "ad"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $thirdLine;
 
     /**
-     * @Groups({"address", "garage_extended"})
+     * @Groups({"address", "garage_extended", "ad"})
      * @ORM\Column(type="string", length=255)
      */
     private $town;
 
     /**
-     * @Groups({"address", "garage_extended"})
+     * @Groups({"address", "garage_extended", "ad"})
      * @ORM\Column(type="string", length=5)
      */
     private $postCode;

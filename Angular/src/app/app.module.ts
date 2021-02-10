@@ -24,6 +24,11 @@ import { PreviewCardComponent } from './components/car/preview-card/preview-card
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SigninFormComponent } from './components/signin-form/signin-form.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { Co2SchemaComponent } from './components/car/co2-schema/co2-schema.component';
+import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,10 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     ProfileViewComponent,
     ResearchComponent,
     ShowAdViewComponent,
+    SigninFormComponent,
+    SignupFormComponent,
+    Co2SchemaComponent,
+    ThousandSeparatorPipe,
   ],
   imports: [
     AppRoutingModule,
@@ -54,6 +63,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     HttpClientModule,
     NgxSliderModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

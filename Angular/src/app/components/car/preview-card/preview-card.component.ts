@@ -12,9 +12,7 @@ export class PreviewCardComponent implements OnInit {
 
   detailsUrl: string;
 
-  constructor() {
-    console.log(this.ad);
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.detailsUrl = '/ad/' + this.ad.id;

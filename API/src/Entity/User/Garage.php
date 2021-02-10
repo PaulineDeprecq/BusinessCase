@@ -29,13 +29,13 @@ class Garage
     private $name;
 
     /**
-     * @Groups({"garage"})
+     * @Groups({"garage", "ad"})
      * @ORM\Column(type="string", length=20, unique=true)
      */
     private $phoneNumber;
 
     /**
-     * @Groups({"garage_extended"})
+     * @Groups({"garage_extended", "ad"})
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */

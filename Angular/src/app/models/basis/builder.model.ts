@@ -31,4 +31,16 @@ export class Builder {
 		this._name = value;
 	}
 
+	static fromJSON(data: any): Builder {
+		return new Builder(
+			data.id,
+			data.name
+		);
+	}
+
+	toJSON(): any {
+		return {
+			name: this.name
+		}
+	}
 }

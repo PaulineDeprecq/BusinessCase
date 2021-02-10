@@ -1,1 +1,267 @@
-<p>show-ad-view works!</p>
+<div *ngIf="!ad" class="container m-5 mx-auto text-center">
+	<h1>Chargement en cours</h1>
+	<img src="assets/pictures/loadcar.png" alt="loading">
+</div>
+
+<div *ngIf="ad" class="container d-flex justify-content-between m-auto p-0 row" [ngClass]="{'pt-4': ad.options.length > 0, 'pt-5': ad.options.length == 0}">
+
+	<!-- Description and pictures -->
+	<section class="card border-dark bg-light col-8 p-0">
+		<div class="card-header bg-dark text-light">
+			<h2 class="h1 font-weight-bold">{{ ad.car.model.builder.name }} {{ ad.car.model.name }} {{ ad.car.generation.generation }} {{ ad.car.version.name }}</h2>
+		</div>
+		<!-- <div class="align-items-start d-flex justify-content-between row"> -->
+		<div class="card-body d-flex flex-wrap">
+			<img class="col-9" src="assets/pictures/audia5.jpg" alt="Audi A5">
+			<aside class="col-3 d-flex flex-column justify-content-around text-right">
+				<!-- {% for picture in ad.pictures %} -->
+				<!-- <img class="w-100" src="{{ picture.link }}" alt="{{ picture.rank }}"> -->
+				<!-- {% endfor %} -->
+			</aside>
+			<div class="card-subtitle mt-3">
+				<h3>Description du véhicule</h3>
+			</div>
+			<div class="card-text text-justify">
+				<p>
+					{{ ad.body }}
+				</p>
+			</div>
+		</div>
+		<div class="card-footer bg-dark text-light">
+			<p class="mb-0 text-right">
+				Annonce mise en ligne le
+				{{ ad.publishedAt | date:'d/MM/y':'UTC' }}
+				à
+				{{ ad.publishedAt | date:'H:mm':'UTC' }}
+			</p>
+		</div>
+	</section>
+
+	<!-- Car's informations -->
+	<section class="card border-dark bg-light text-dark col-3 p-0 infocar">
+		<div class="card-header bg-dark text-light m-0 p-0">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<div class="d-flex justify-content-between">
+								<h2 class="h1 font-weight-bold">
+									Points Clés
+									<img class="picto picto-title" src="assets/icones/showadicon/key.svg">
+								</h2>
+								<button class="btn btn-light bg-light border-0 text-dark my-auto" id="interested">Je suis intéressé·e</button>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Circulation date -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Mise en circulation:</p>
+								<p>{{ ad.circulationDate }}</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Gearbox -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Boîte {{ ad.hasMechanicalGearbox !== NULL ? (ad.hasMechanicalGearbox ? 'manuelle:' : 'automatique:') : 'NC' }}</p>
+								<p>{{ ad.speedNbr > 0 ? ad.speedNbr + ' rapports' : 'NC' }}</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Fuel -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Carburant:</p>
+								<p>{{ ad.fuel.type }}</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Mileage -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Kilométrage:</p>
+								<p>{{ ad.mileage | thousandSeparator }} km</p>
+							</div>
+						</td>
+					</tr>
+					<!-- L/100 consumption fuel -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Consommation:</p>
+								<p>{{ ad.consumptionL100 > 0 ? ad.consumptionL100 + 'L/100' : 'NC' }}</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Doors -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Nombre de portes:</p>
+								<p>{{ ad.hasFiveDoors !== NULL ? (ad.hasFiveDoors ? '5' : '3') : 'NC' }}</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Color -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Couleur:</p>
+								<p class="my-auto">
+									<img class="picto mt-0" src="assets/icones/color/{{ ad.color.color | lowercase }}.svg">
+									{{ ad.color ? ad.color.color + ( ad.paintType ? ' ' + ad.paintType.name : '') : 'NC' }}
+								</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Upholstery -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Sellerie:</p>
+								<p>
+									{{ ad.isLeatherUpholstery !== NULL ? (ad.isLeatherUpholstery ? 'Cuir' : 'Tissu') : 'NC' }}
+									- {{ ad.seatNbr }} places
+									<img src="assets/icones/options/seat.svg" alt="seat icon" class="seat">
+								</p>
+							</div>
+						</td>
+					</tr>
+					<!-- Crit'Air -->
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<p>Certificat Crit'Air:</p>
+								<img class="picto mr-0" src="assets/icones/critair/{{ ad.critair.certificate }}.png">
+								<p *ngIf="ad.critair.certificate == NULL">NC</p>
+							</div>
+						</td>
+					</tr>
+					<!-- CO2's emission -->
+					<tr>
+						<td>
+							<p>Émission de CO2: {{ ad.CO2emission > 0 ? '' : 'NC' }}</p>
+							<div *ngIf="ad.CO2emission !== NULL">
+								<app-co2-schema [emission]="ad.CO2emission"></app-co2-schema>
+							</div>
+						</td>
+					</tr>
+					<!-- Options -->
+					<tr class="border-bottom-0">
+						<td class="pr-0">
+							<p class="mb-2">Options: {{ ad.options.length == 0 ? 'NC' : '' }}</p>
+							<div *ngIf="ad.options.length > 0" class="d-flex options-icon w-100">
+								<img 
+									*ngFor="let option of ad.options" 
+									src="assets/icones/options/option-{{ option.id }}.svg"
+									alt="{{ option.name }}"
+									title="{{ option.name }}">
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="card-body p-0">
+			<ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-between text-center text-dark nav border-dark border-top-0">
+				<li ngbNavItem class="w-40" [ngClass]="{'shadow': imActivated, 'text-muted': !imActivated}">
+					<a 
+							ngbNavLink 
+							class="border-dark border-left-0 m-0 py-0 nav-link"
+							[ngClass]="{'non-active-panel': !imActivated, 'bg-light': imActivated}"
+							(click)="imActivated = true">
+						<h2 class="h1 font-weight-bold">
+							Moteur
+							<img class="picto picto-title" src="assets/icones/showadicon/engine{{ !imActivated ? '-muted' : '' }}.svg">
+						</h2>
+					</a>
+					<ng-template ngbNavContent>
+						<table class="text-dark" [ngClass]="{'bg-light': imActivated, 'non-active-panel': !imActivated}">
+							<tbody>
+								<tr>
+									<td><p>Cylindrée:</p></td>
+									<td class="text-right"><p>{{ ad.displacement }} cc</p></td>
+								</tr>
+								<tr>
+									<td><p>Puissance fiscal:</p></td>
+									<td class="text-right"><p>{{ ad.fiscalPower }} CV</p></td>
+								</tr>
+								<tr>
+									<td><p>Puissance din:</p></td>
+									<td class="text-right"><p>{{ ad.dinPower }} ch</p></td>
+								</tr>
+							</tbody>
+						</table>
+					</ng-template>
+				</li>
+				<li ngbNavItem class="w-60" [ngClass]="{'shadow': !imActivated, 'text-muted': imActivated}">
+					<a 
+							ngbNavLink 
+							class="border-dark border-left-0 border-right-0 m-0 py-0 nav-link"
+							[ngClass]="{'bg-light': !imActivated, 'non-active-panel': imActivated}"
+							(click)="imActivated = false">
+						<h2 class="h1 font-weight-bold">
+							Performances
+							<img class="picto picto-title" src="assets/icones/showadicon/speedometer{{ imActivated ? '-muted' : '' }}.svg">
+						</h2>
+					</a>
+					<ng-template ngbNavContent>
+						<table class="text-dark" [ngClass]="{'bg-light': !imActivated, 'non-active-panel': imActivated}">
+							<tbody>
+								<tr>
+									<td><p>Vitesse maximum:</p></td>
+									<td class="text-right"><p>{{ ad.maxSpeed }} km/h</p></td>
+								</tr>
+								<tr>
+									<td><p>Accélération 0-100 km/h:</p></td>
+									<td class="text-right"><p>{{ ad.acceleration }} sec</p></td>
+								</tr>
+								<tr>
+									<td><p>Transmission:</p></td>
+									<td class="text-right"><p>Traction avant</p></td>
+								</tr>
+							</tbody>
+						</table>
+					</ng-template>
+				</li>
+			</ul>
+			<div [ngbNavOutlet]="nav"></div>
+		</div>
+		<div class="card-footer bg-dark text-light p-0">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<h2 class="h1 font-weight-bold">
+								<img class="picto-price-tag" src="assets/icones/showadicon/coins.svg">
+								Prix:
+							</h2>
+						</th>
+						<th class="text-right"><p class="h2 font-weight-bold">{{ ad.price | thousandSeparator }} €</p></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-bottom-0">
+						<th>
+							<h2 class="h1 font-weight-bold">
+								<img class="picto-price-tag" src="assets/icones/showadicon/tag.svg">
+								Référence:
+							</h2>
+						</th>
+						<th class="text-right"><p class="h2 font-weight-bold">{{ ad.reference }}</p></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>
+
+
+

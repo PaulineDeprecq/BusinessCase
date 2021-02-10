@@ -1,32 +1,59 @@
 <aside class="col-1 px-3 search">
-	<fieldset class="form-group">
+	<fieldset class="form-group text-center">
 		<h2 class="py-5 text-center">Recherche</h2>
-		<ul class="d-flex flex-column">
-			<li class="align-items-center d-flex">
-				<p class="m-0">
 
-					<a href="#">
-						<i class="fas fa-plus mr-2"></i>
-						<i class="d-none fas fa-minus"></i>
-						Marques
-					</a>
-				</p>
+		<!-- Brand names -->
+		<div ngbDropdown class="d-inline-block w-100">
+			<button ngbDropdownToggle class="btn btn-sm btn-outline-default text-left w-100">{{ !builder ? 'Marques' : builder }}</button>
+			<div ngbDropdownMenu aria-labelledby="filterByBrand">
+				<button ngbDropdownItem (click)="onClickFilterBy(['all', 'builders'])">Toutes</button>
+				<button ngbDropdownItem *ngFor="let builder of builders"
+						(click)="onClickFilterBy(['builder', builder.name])">
+					{{ builder.name }}
+				</button>
+			</div>
+		</div>
+
+		<!-- Model names -->
+		<div 
+				*ngIf="modelsForBuilderID.length > 0"
+				ngbDropdown class="d-inline-block w-100">
+			<button ngbDropdownToggle class="btn btn-sm btn-outline-default text-left w-100">{{ !model ? 'Modèles' : model }}</button>
+			<div ngbDropdownMenu aria-labelledby="filterByModel">
+				<button ngbDropdownItem (click)="onClickFilterBy(['all', 'models'])">Toutes</button>
+				<button ngbDropdownItem *ngFor="let model of modelsForBuilderID"
+						(click)="onClickFilterBy(['model', model.name])">
+					{{ model.name }}
+				</button>
+			</div>
+		</div>
+
+		<!-- Fuel types -->
+		<div ngbDropdown class="d-inline-block w-100">
+			<button ngbDropdownToggle class="btn btn-sm btn-outline-default text-left w-100">{{ !fuel ? 'Carburant' : fuel }}</button>
+			<div ngbDropdownMenu aria-labelledby="filterByFuel">
+				<button ngbDropdownItem (click)="onClickFilterBy(['all', 'fuels'])">Tous</button>
+				<button ngbDropdownItem *ngFor="let fuel of fuels"
+						(click)="onClickFilterBy(['fuel', fuel.type])">
+					{{ fuel.type | titlecase }}
+				</button>
+			</div>
+		</div>
+
+		<ul>
+			<li class="mb-0">
+				<p class="mb-0">Année</p>
+				<p class="p-subtitle">de mise en circulation</p>
+				<ngx-slider [(value)]="yearValue" [(highValue)]="yearMaxValue" [options]="yearOptions"
+					(click)="onClickFilterBy(['year', yearValue, yearMaxValue])"></ngx-slider>
 			</li>
-			<li class="align-items-center d-flex">
-				<i class="fas fa-plus mr-2"></i>
-				<i class="d-none fas fa-minus"></i>
-				<p class="m-0">
-					<a href="#">Carburant</a>
-				</p>
-			</li>
-			<li class="less-mb">
-				<p>Année</p>
-				<ngx-slider [(value)]="yearValue" [(highValue)]="yearMaxValue" [options]="yearOptions"></ngx-slider>
-			</li>
-			<li class="less-mb">
+			<li class="mb-0">
 				<p>Prix</p>
-				<ngx-slider [(value)]="priceValue" [(highValue)]="priceMaxValue" [options]="priceOptions"></ngx-slider>
+				<ngx-slider [(value)]="priceValue" [(highValue)]="priceMaxValue" [options]="priceOptions"
+					(click)="onClickFilterBy(['price', priceValue, priceMaxValue])"></ngx-slider>
 			</li>
 		</ul>
+
+		<button class="btn bg-light text-dark w-75 reset" (click)="onClickFilterBy(['reset'])">Reset</button>
 	</fieldset>
 </aside>

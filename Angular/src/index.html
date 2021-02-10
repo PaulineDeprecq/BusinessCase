@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8">
   <title>Angular</title>
@@ -14,19 +14,4 @@
 <body>
   <app-root></app-root>
 </body>
-<script>
-  $("#slider-range-bud").slider({
-    range: true,
-    min: 1000,
-    max: 30000,
-    step: 500,
-    values: [8000, 23000],
-    slide: function (event, ui) {
-      $("#data-bud-1").html(ui.values[0] + " €");
-      $("#data-bud-2").html(ui.values[1] + " €");
-    }
-  });
-  $("#data-bud-1").html($("#slider-range-bud").slider("values", 0) + " €");
-  $("#data-bud-2").html($("#slider-range-bud").slider("values", 1) + " €");
-</script>
 </html>

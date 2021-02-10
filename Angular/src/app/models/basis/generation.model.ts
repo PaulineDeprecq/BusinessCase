@@ -31,4 +31,16 @@ export class Generation {
 		this._generation = value;
 	}
 
+	static fromJSON(data: any): Generation {
+		return new Generation(
+			data.id,
+			data.generation
+		);
+	}
+
+	toJSON(): any {
+		return {
+			generation: this.generation
+		}
+	}
 }

@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Opzione
 {
     /**
-     * @Groups({"option"})
+     * @Groups({"option", "ad"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -26,12 +26,6 @@ class Opzione
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
-
-    /**
-     * @Groups({"option"})
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $icon;
 
     /**
      * @ORM\ManyToMany(targetEntity=Ad::class, mappedBy="options")
@@ -56,18 +50,6 @@ class Opzione
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(string $icon): self
-    {
-        $this->icon = $icon;
 
         return $this;
     }

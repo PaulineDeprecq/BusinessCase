@@ -1,4 +1,5 @@
 import { Builder } from './builder.model';
+
 export class Model {
 	private _id: number;
 	private _name: string;
@@ -50,4 +51,18 @@ export class Model {
 		this._builder = value;
 	}
 
+	static fromJSON(data: any): Model {
+		return new Model(
+			data.id,
+			data.name,
+			Builder.fromJSON(data.builder)
+		);
+	}
+
+	toJSON():any {
+		return {
+			name: this.name,
+			builder: this.builder.toJSON()
+		}
+	}
 }

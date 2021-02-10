@@ -1,0 +1,71 @@
+aside.search {
+	background-color: #2c2c2c;
+	color: white;
+	height: 85%;
+}
+
+aside.search h2 {
+	font-size: 25px;
+	font-weight: 700;
+}
+
+aside.search ul li {
+	margin-bottom: 50px;
+}
+
+aside.search ul li.less-mb {
+	margin-bottom: 20px;
+}
+
+aside.search ul li i {
+	font-size: 10px;
+}
+
+aside.search ul li div {
+	width: 80%;
+	height: 5px;
+}
+
+aside.search ul li input {
+	border: 0;
+	text-align: center;
+	background-color: #2c2c2c;
+	color: white;
+	width: 100%;
+	font-weight: 100;
+	font-size: 14px;
+}
+
+aside.search ul li div span {
+	border-radius: 50px;
+	width: 10px !important;
+	height: 13px !important;
+}
+
+button.reset {
+	border: none;
+}
+
+button.reset:hover {
+	background-color: #c71616!important;
+	color: #eee!important;
+	border-radius: 1rem;
+}
+
+.dropdown-item {
+	font-size: 1.5rem!important;
+}
+
+ul li p {
+	font-size: 1.9rem;
+	font-weight: 500;
+	padding: 1rem 1.5rem 0;
+	text-align: left;
+}
+
+ul li p.p-subtitle {
+	font-size: 1.2rem;
+	font-weight: 400;
+	padding: 0;
+	padding-left: 1.5rem;
+}

@@ -24,7 +24,7 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api_public:
-            pattern: ^/api/v1/ads
+            pattern: ^/api/v1/(ads|builders|fuels|models|professionals)
             anonymous: true
         api:
             pattern:   ^/api
@@ -52,6 +52,10 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/v1/ads, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/builders, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/fuels, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/models, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/professionals, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
     
