@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'ad/:id', component: ShowAdViewComponent },
   { path: 'ad/add', canActivate: [AuthGuard], component: AddAdViewComponent },
   { path: 'ad/edit/:id', canActivate: [AuthGuard], component: EditAdViewComponent },
-  { path: 'profile/:id', canActivate: [AuthGuard], component: ProfileViewComponent },
+  { path: 'profile', canActivate: [AuthGuard], component: ProfileViewComponent },
   { path: '**', component: ErrorViewComponent },
 ];
 

@@ -42,11 +42,13 @@ class BuilderController extends AbstractController
     public function add(Request $request)
     {
         $postedBuilder = json_decode($request->getContent(), true);
-
+        
         $builder = new Builder();
         $form = $this->createForm(BuilderType::class, $builder, ['csrf_protection' => false]);
-
+        
         $form->submit($postedBuilder);
+        
+        $this->denyAccessUnlessGranted('ADD', $builder);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -76,6 +78,8 @@ class BuilderController extends AbstractController
         $form = $this->createForm(BuilderType::class, $builder, ['csrf_protection' => false]);
         $form->submit($postedBuilder);
 
+        $this->denyAccessUnlessGranted('EDIT', $builder);
+
         if ($form->isValid()) {
             $builder->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
@@ -98,6 +102,8 @@ class BuilderController extends AbstractController
      */
     public function delete(Builder $builder)
     {
+        $this->denyAccessUnlessGranted('DELETE', $builder);
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($builder);
         $em->flush();

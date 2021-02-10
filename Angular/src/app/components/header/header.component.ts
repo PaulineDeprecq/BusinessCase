@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth/auth.service';
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,14 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  isAuth = false;
+  isAuth: boolean;
+  isAuthSub: Subscription;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this._initSubs();
   }
 
   onClickLogout() {
+    this.authService.signOut();
+  }
 
+  _initSubs() {
+    this.isAuthSub = this.authService.isAuth.subscribe(
+      (isAuth: boolean) => this.isAuth = isAuth
+    );
   }
 }

@@ -69,6 +69,8 @@ class AdController extends AbstractController
      */
     public function add(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         $postedAd = json_decode($request->getContent(), true);
 
         $ad = new Ad();
@@ -99,6 +101,8 @@ class AdController extends AbstractController
      */
     public function edit(Ad $ad, Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $postedAd = json_decode($request->getContent(), true);
 
         $form = $this->createForm(AdType::class, $ad, ['csrf_protection' => false]);
@@ -126,6 +130,8 @@ class AdController extends AbstractController
      */
     public function delete(Ad $ad)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($ad);
         $em->flush();

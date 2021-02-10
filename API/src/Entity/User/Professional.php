@@ -97,8 +97,7 @@ class Professional implements UserInterface
     {
         $this->createdAt = new \DateTime();
         $this->garages = new ArrayCollection();
-        // $this->roles = [];
-        // $this->username = ucfirst($this->firstname) . ucfirst($this->lastname);        
+        $this->username = ucfirst($this->firstname) . ucfirst($this->lastname);        
     }
 
     public function getId(): ?int
@@ -125,7 +124,14 @@ class Professional implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -289,13 +295,6 @@ class Professional implements UserInterface
     public function setIsValidate(bool $isValidate): self
     {
         $this->isValidate = $isValidate;
-
-        return $this;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }
