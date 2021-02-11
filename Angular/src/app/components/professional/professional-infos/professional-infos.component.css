@@ -1,0 +1,26 @@
+.btn {
+	border: solid #333;
+}
+
+.btn:hover {
+	border: solid #c71616;
+	color: #c71616;
+}
+
+.btn.bg-light {
+	border: solid #eee;
+}
+
+.btn.bg-light:hover {
+	background-color: #333!important;
+	border: solid #c71616;
+	color: #c71616!important;
+}
+
+div.col-4 {
+	margin-top: 2rem;
+}
+
+p {
+	margin: 0;
+}

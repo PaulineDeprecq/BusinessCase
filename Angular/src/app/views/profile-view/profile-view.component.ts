@@ -7,9 +7,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileViewComponent implements OnInit {
 
-  constructor() { }
+  infoActive: boolean;
+  garageActive: boolean;
+  adActive: boolean;
+
+  constructor() {
+    this.infoActive = true;
+    this.garageActive = false;
+    this.adActive = false;
+  }
 
   ngOnInit(): void {
   }
 
+  onClickActiveLink(link: string) {
+    switch(link) {
+      case 'info':
+        this.infoActive = true;
+        this.garageActive = false;
+        this.adActive = false;
+        break;
+      case 'garage':
+        this.infoActive = false;
+        this.garageActive = true;
+        this.adActive = false;
+        break;
+      case 'ad':
+        this.infoActive = false;
+        this.garageActive = false;
+        this.adActive = true;
+        break;
+    }
+  }
 }

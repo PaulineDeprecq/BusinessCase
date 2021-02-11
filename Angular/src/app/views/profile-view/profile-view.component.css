@@ -1,0 +1,63 @@
+h2 {
+	font-size: 3.5rem;
+	font-weight: 400;
+}
+
+img {
+	width: 25%;
+}
+
+section.container-fluid:first-of-type {
+	margin-top: 10rem;
+}
+
+ul.nav-tabs li {
+	margin: 0 5rem;
+}
+
+ul.nav-tabs li>a.active {
+	border-bottom: solid .5rem #c71616;
+}
+
+div.borderXwidth a {
+	background-color: inherit;
+	border: none;
+	color: #eee;
+    margin: 0px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+}
+
+div.borderXwidth a:hover {
+	color: #c71616;
+}
+
+div.borderXwidth a:before, div.borderXwidth a:after
+{
+    position: absolute;
+    opacity: 0;
+    width: 0%;
+    height: 2px;
+    content: '';
+    background: #c71616;
+    transition: all 0.3s;
+}
+
+div.borderXwidth a:before
+{
+    left: 0px;
+    top: 0px;
+}
+
+div.borderXwidth a:after
+{
+    right: 0px;
+    bottom: -2px;
+}
+
+div.borderXwidth a:hover:before, div.borderXwidth a:hover:after
+{
+    opacity: 1;
+    width: 75%;
+}

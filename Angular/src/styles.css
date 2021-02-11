@@ -12,8 +12,8 @@ html {
 }
 
 .btn {
-	background-color: #2c2c2c;
-	border-color: #2c2c2c;
+	background-color: #333;
+	border-color: #333;
 	color: white;
 	padding: 1rem 1.5rem;
 	font-size: 1.9rem;
@@ -23,11 +23,11 @@ html {
 .btn:hover {
 	background-color: white;
 	border-color: white;
-	color: #2c2c2c;
+	color: #333;
 }
 
 a:hover {
-	color: #2c2c2c;
+	color: #333;
 }
 
 a .card-header :hover,
@@ -35,11 +35,21 @@ a .card-header :hover,
 	color: #d63031;
 }
 
+h3 {
+	font-size: 1.8rem;
+	font-weight: 400;
+	margin-bottom: 0;
+}
+
 .search {
 	font-family: 'Roboto', sans-serif;
 	position: fixed;
 	left: 0;
 	width: 160px;
+}
+
+table {
+	font-size: inherit;
 }
 
 .container {
