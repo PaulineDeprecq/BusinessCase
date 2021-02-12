@@ -3,40 +3,47 @@
 		<div class="col-12"><h3>Mes informations personnelles</h3></div>
 		<div class="col-4">
 			<p>Civilité</p>
-			<p>Monsieur</p>
+			<p *ngIf="!editPerso">Monsieur</p>
+			<input *ngIf="editPerso" type="text" placeholder="Monsieur">
 		</div>
 		<div class="col-4">
 			<p>Prénom *</p>
-			<p>Georges</p>
+			<p *ngIf="!editPerso">Georges</p>
+			<input *ngIf="editPerso" type="text" placeholder="Georges">
 		</div>
 		<div class="col-4">
 			<p>Nom *</p>
-			<p>DUPONT</p>
+			<p *ngIf="!editPerso">DUPONT</p>
+			<input *ngIf="editPerso" type="text" placeholder="DUPONT">
 		</div>
 	</div>
 	<div class="col-3 m-auto text-right">
-		<button class="btn">Modifier</button>
+		<button *ngIf="!editPerso" class="btn" (click)="editPerso = !editPerso">Modifier</button>
+		<button *ngIf="editPerso" class="btn" (click)="onClickEditPerso()">Valider</button>
 	</div>
 </section>
-<section class="container-fluid bg-dark text-light py-5">
+<section class="container-fluid py-5">
 	<div class="container-sm mx-auto row">
 		<div class="col-9 row">
 			<div class="col-12"><h3>Mes moyens de communications</h3></div>
 			<div class="col-4">
 				<p>Téléphone mobile</p>
-				<p>06.xx.xx.xx.xx</p>
+				<p *ngIf="!editCom">06.xx.xx.xx.xx</p>
+			<input *ngIf="editCom" type="text" placeholder="06.xx.xx.xx.xx">
 			</div>
 			<div class="col-4">
 				<p>Téléphone fixe</p>
-				<p>04.69.xx.xx.xx</p>
+				<p *ngIf="!editCom">04.69.xx.xx.xx</p>
+			<input *ngIf="editCom" type="text" placeholder="04.69.xx.xx.xx">
 			</div>
 			<div class="col-4">
 				<p>e-Mail de contact</p>
-				<p>contact@garagexy.com</p>
+				<p *ngIf="!editCom">contact@garagexy.com</p>
+			<input *ngIf="editCom" type="email" placeholder="contact@garagexy.com">
 			</div>
 		</div>
 		<div class="col-3 m-auto text-right">
-			<button class="btn bg-light text-dark">Modifier</button>
+			<button class="btn gray" (click)="editCom = !editCom">{{ editCom ? 'Valider' : 'Modifier'}}</button>
 		</div>
 	</div>
 </section>

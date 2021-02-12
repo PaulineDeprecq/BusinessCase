@@ -109,9 +109,7 @@ export class ResearchComponent implements OnInit, OnDestroy {
    * @param attr 
    */
   onClickFilterBy(attr: Array<any>) {
-
-    console.log(attr);
-    
+    //! MILEAGE !\\
     switch(attr[0]) {
       case 'builder':
         this.builder = attr[1];
@@ -144,6 +142,7 @@ export class ResearchComponent implements OnInit, OnDestroy {
         this.adService.adsPerPage.next(10);
         this.builder = '';
         this.model = '';
+        this.modelsForBuilderID.splice(0, this.modelsForBuilderID.length);
         this.fuel = '';
         this.yearMin = '1950';
         this.yearMax = '';

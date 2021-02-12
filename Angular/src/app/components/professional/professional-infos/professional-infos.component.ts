@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalInfosComponent implements OnInit {
 
+  editPerso: boolean = false;
+  editCom: boolean = false;
+  editPro: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClickEditPerso() {
+    this.editPerso = !this.editPerso;
+  }
 }

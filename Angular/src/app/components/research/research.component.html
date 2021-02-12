@@ -54,6 +54,11 @@
 			</li>
 		</ul>
 
-		<button class="btn bg-light text-dark w-75 reset" (click)="onClickFilterBy(['reset'])">Reset</button>
+		<button 
+				*ngIf="builder || model || fuel || yearMin || priceMin"
+				class="btn bg-light text-dark w-75 reset" 
+				(click)="onClickFilterBy(['reset'])">
+			Reset
+		</button>
 	</fieldset>
 </aside>
